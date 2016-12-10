@@ -5,13 +5,13 @@ The official app of IEEE NSIT.
 ###1. Home
 Serves as the home page of the app. Displays posts from IEEE NSIT's facebook page. Tap on a post to view text and the associated image (if any).
 
-<img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/post.PNG" height = 250>
-<img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/post.PNG" height = 250>
+<img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/home.PNG" height = 300>
+   <img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/post.PNG" height = 300>
 
 ###2. Events (in development)
 Shows a collection of upcoming events organised by IEEE NSIT. Uses a card based interface; swipe between cards to view events.
 
-<img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/event.PNG"
+<img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/event.PNG" height = 300>
 
 ##Libraries used
 - SDWebImage : Async image downloading on iOS
