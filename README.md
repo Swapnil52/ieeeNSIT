@@ -11,7 +11,7 @@ Serves as the home page of the app. Displays posts from IEEE NSIT's facebook pag
 ###2. Events (in development)
 Shows a collection of upcoming events organised by IEEE NSIT. Uses a card based interface; swipe between cards to view events.
 
-<img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/event.PNG" height = 300>
+<img src = "http://i.giphy.com/w1hX8BRHzDaz6.gif" height = 300>
 
 ##Libraries used
 - SDWebImage : Async image downloading on iOS
