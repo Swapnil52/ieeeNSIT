@@ -20,7 +20,7 @@ Features spring animation with damping introduced in iOS 7. Pull down to refresh
 ###1. SDWebImage
 Popular asynchronous image downloading library (https://github.com/rs/SDWebImage)
 
-###2. MWPhotoBrowser : Include videos, images and albums in iOS apps
+###2. MWPhotoBrowser
 Versatile library to show images, videos and albums in iOS apps (https://github.com/mwaterfall/MWPhotoBrowser)
 
 ##APIs used
