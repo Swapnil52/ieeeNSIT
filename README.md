@@ -3,16 +3,18 @@ IEEE-NSIT Student Branch works to create an atmosphere of technical excellence f
 
 ##Features
 ###1. Home
-Serves as the home page of the app. Displays posts from IEEE NSIT's facebook page. Tap on a post to view text and the associated image (if any).
+Serves as the home page of the app. Displays posts from IEEE NSIT's facebook page. Tap on a post to view text and the associated image (if any). 
 
 <img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/home.PNG" height = 300>
           <img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/post.PNG" height = 300>
+          
+The blur effect shown above works by taking a low resolution screenshot just as the user taps on a cell and presenting the new controller modally - with the screenshot masked by a UIVisualEffectView instance. This provides contextual awareness to the user.
 
 ###2. Events (in development)
-Shows a collection of upcoming events organised by IEEE NSIT. Uses a card based interface; swipe between cards to view events.
+Shows a collection of upcoming events organised by IEEE NSIT. Uses a card based interface - swipe between cards to view events.
 Features spring animation with damping introduced in iOS 7. Pull down to refresh. Uses the iEE- NSIT-events api.
 
-<img src = "http://i.giphy.com/w1hX8BRHzDaz6.gif" height = 300>
+<img src = "http://i.giphy.com/ONQWX63qI04vK.gif" height = 300>
 
 ##Libraries used
 ###1. SDWebImage
