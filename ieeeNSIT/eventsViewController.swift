@@ -53,7 +53,7 @@ class eventsViewController : UIViewController {
         
         downloadEvents { (success, events, count) in
             
-            if success == true
+            if success == true && Reachability.isConnectedToNetwork() == true
             {
                 self.count = count
                 self.events = events
@@ -179,6 +179,11 @@ class eventsViewController : UIViewController {
         swipeEnabled = false
         events.removeAll()
         
+        for view in self.mainView.subviews
+        {
+            view.removeFromSuperview()
+        }
+        
         showMainView()
         spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         spinner.frame = CGRect(x: self.mainView.bounds.width/2 - 50, y: self.mainView.bounds.height/2 - 50, width: 100, height: 100)
@@ -188,7 +193,7 @@ class eventsViewController : UIViewController {
         
         downloadEvents { (success, events, count) in
             
-            if success == true
+            if success == true && Reachability.isConnectedToNetwork() == true
             {
                 self.count = count
                 self.events = events
@@ -212,8 +217,8 @@ class eventsViewController : UIViewController {
     
     func downloadEvents(completionHandler : @escaping (_ success : Bool, _ array : [[String:AnyObject]], _ count : Int) -> Void)
     {
-        //let url = URL(string: "http://ieeensit.org/appevents.json")
-        let url = URL(string: "https://api.myjson.com/bins/pz64v")
+        let url = URL(string: "http://ieeensit.org/appevents.json")
+//        let url = URL(string: "https://api.myjson.com/bins/pz64v")
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if let error = error
@@ -222,6 +227,9 @@ class eventsViewController : UIViewController {
                     
                     let alert = UIAlertController(title: "An Error Occurred", message: "\(error.localizedDescription)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        
+                        print("JSON Serialisation failed")
+                        completionHandler(false, [], 0)
                         
                     }))
                     self.present(alert, animated: true, completion: nil)

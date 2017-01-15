@@ -32,6 +32,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
     var windowButton = UIButton()
     var browser = MWPhotoBrowser()
     var statusBlurView = UIVisualEffectView()
+    var placeholderImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +48,11 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         let url = "https://graph.facebook.com/278952135548721/posts?limit=20&fields=id,full_picture,picture,from,shares,attachments,message,object_id,link,created_time,comments.limit(0).summary(true),likes.limit(0).summary(true)&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD"
         
         
-        s = UIActivityIndicatorView(frame: CGRect(x:self.view.bounds.width/2-50, y:self.view.bounds.height/2-50-100, width:100, height:100))
-        s.activityIndicatorViewStyle = .whiteLarge
+        s = UIActivityIndicatorView(frame: CGRect(x:self.view.bounds.width/2-100, y:self.view.bounds.height/2-50-100, width:200, height:200))
+        s.activityIndicatorViewStyle = .gray
         s.hidesWhenStopped = true
+        s.layer.cornerRadius = 10
+        s.backgroundColor = UIColor.lightText
         self.view.addSubview(s)
         
         //configure the refresher
@@ -66,16 +69,50 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         self.view.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.clear
         
-        do
+        if (Reachability.isConnectedToNetwork() == true)
         {
             
-            try loadData()
+            
+            s.startAnimating()
+            downloadData(url: url, completionHandler: { (success, jsonData) in
+
+                if success == true
+                {
+
+                    DispatchQueue.main.async(execute: {
+
+                        self.parseJSON(jsonData: jsonData)
+                        self.saveData()
+                        self.isRefresherAnimating = false
+                        self.s.stopAnimating()
+                        UIView.setAnimationsEnabled(false)
+                        CATransaction.begin()
+                        self.tableView.reloadData()
+                        CATransaction.commit()
+                        CATransaction.setCompletionBlock { () -> Void in
+
+                            UIView.setAnimationsEnabled(true)
+                        }
+                        self.isRefresherAnimating = true
+                        self.tableView.isHidden = false
+                        
+                    })
+                    
+                }
+                
+            })
+
             
         }
-        catch
+        else
         {
-            
-            if Reachability.isConnectedToNetwork() == true
+            do
+            {
+    
+                try loadData()
+                
+            }
+            catch
             {
                 
                 s.startAnimating()
@@ -84,15 +121,13 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                     if success == true
                     {
                         
-                        DispatchQueue.main.async(execute: { 
+                        DispatchQueue.main.async(execute: {
                             
                             self.parseJSON(jsonData: jsonData)
                             self.saveData()
                             self.isRefresherAnimating = false
                             UIView.setAnimationsEnabled(false)
                             CATransaction.begin()
-                            
-                            
                             self.tableView.reloadData()
                             CATransaction.commit()
                             CATransaction.setCompletionBlock { () -> Void in
@@ -100,17 +135,89 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                                 UIView.setAnimationsEnabled(true)
                             }
                             self.isRefresherAnimating = true
-                            print(self.highResImageURLs)
                             self.tableView.isHidden = false
                             self.s.stopAnimating()
                         })
                         
                     }
+                    else
+                    {
+                        DispatchQueue.main.async(execute: {
+                            
+                            
+                            self.s.stopAnimating()
+                            self.showPlaceholder()
+                            
+                        })
+                    
+                    }
                     
                 })
+
                 
             }
         }
+        
+//        do
+//        {
+//            
+//            try loadData()
+//            
+//        }
+//        catch
+//        {
+//            
+//            if Reachability.isConnectedToNetwork() == true
+//            {
+//                
+//                s.startAnimating()
+//                downloadData(url: url, completionHandler: { (success, jsonData) in
+//                    
+//                    if success == true
+//                    {
+//                        
+//                        DispatchQueue.main.async(execute: { 
+//                            
+//                            self.parseJSON(jsonData: jsonData)
+//                            self.saveData()
+//                            self.isRefresherAnimating = false
+//                            UIView.setAnimationsEnabled(false)
+//                            CATransaction.begin()
+//                            self.tableView.reloadData()
+//                            CATransaction.commit()
+//                            CATransaction.setCompletionBlock { () -> Void in
+//                                
+//                                UIView.setAnimationsEnabled(true)
+//                            }
+//                            self.isRefresherAnimating = true
+//                            self.tableView.isHidden = false
+//                            self.s.stopAnimating()
+//                        })
+//                        
+//                    }
+//                    
+//                })
+//                
+//            }
+//        }
+        
+    }
+    
+    //MARK : Show placeholder image when there's no data to show
+    
+    func showPlaceholder()
+    {
+        
+        //stop spinner from animating, if it is
+        if (s.isAnimating)
+        {
+            s.stopAnimating()
+        }
+        //set up the placeholder image view ('Nothing to do here')
+        self.placeholderImageView = UIImageView(frame: CGRect(x: self.view.bounds.width/2-100, y: self.view.bounds.height/2 - 100, width: 200, height: 200))
+        self.placeholderImageView.image = UIImage(named: "placeholder.png")
+        self.placeholderImageView.contentMode = .scaleAspectFit
+        self.view.addSubview(placeholderImageView)
         
     }
     
@@ -141,11 +248,8 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         self.likes = UserDefaults.standard.object(forKey: "likes") as! [NSInteger]
         self.next20 = UserDefaults.standard.object(forKey: "next20") as! String
         
-        print(dates)
-        
         UIView.setAnimationsEnabled(false)
         CATransaction.begin()
-        
         
         self.tableView.reloadData()
         CATransaction.commit()
@@ -325,6 +429,9 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
     func refresh()
     {
         
+        //remove the placeholder image view from its superview i.e. self.view
+        self.placeholderImageView.removeFromSuperview()
+        
         animateRefresher(colorIndex: 0)
         
         let url = "https://graph.facebook.com/278952135548721/posts?limit=20&fields=id,full_picture,picture,from,shares,attachments,message,object_id,link,created_time,comments.limit(0).summary(true),likes.limit(0).summary(true)&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD"
@@ -379,6 +486,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                 {
                     
                     self.refresher.endRefreshing()
+                    self.isRefresherAnimating = false
                     
                 }
                 
@@ -386,12 +494,29 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                 {
                     
                     self.s.stopAnimating()
+                    self.isRefresherAnimating = false
+                    
+                }
+                
+                do
+                {
+                    try self.loadData()
+                }
+                catch
+                {
+                    
+                    self.showPlaceholder()
                     
                 }
                 
             }))
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: {
             
+                
+            
+            })
+            
+           
         }
     }
     
@@ -409,10 +534,9 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                     
                     if self.refresher.isRefreshing
                     {
-                    
-                    self.refresher.endRefreshing()
-                    
+                        self.refresher.endRefreshing()
                     }
+                    completionHandler(false, [:])
                     
                 }))
                 self.present(alert, animated: true, completion: nil)
