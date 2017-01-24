@@ -19,6 +19,7 @@
 		554A55501DB091F20018E8F5 /* SDInstantArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554A554F1DB091F20018E8F5 /* SDInstantArticleViewController.swift */; };
 		558553B11DAFC814003B6C48 /* ieeeFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558553B01DAFC814003B6C48 /* ieeeFeedCell.swift */; };
 		5592E1771DB2555700A57FCD /* noImageFeedPageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5592E1761DB2555700A57FCD /* noImageFeedPageTest.swift */; };
+		55977BF11E37CF8400887E89 /* pushNotifications.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 55977BF01E37CF8400887E89 /* pushNotifications.PNG */; };
 		55A136E61DAE25AC001AB95A /* connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A136E51DAE25AC001AB95A /* connection.swift */; };
 		55C300C71E2BE3DB0012BAB5 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C300C61E2BE3DB0012BAB5 /* placeholder.png */; };
 		55D0C3E71DF993C6003BEB0B /* ieee_logo-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D0C3E61DF993C6003BEB0B /* ieee_logo-2.png */; };
@@ -50,6 +51,7 @@
 		554A554F1DB091F20018E8F5 /* SDInstantArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDInstantArticleViewController.swift; sourceTree = "<group>"; };
 		558553B01DAFC814003B6C48 /* ieeeFeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ieeeFeedCell.swift; sourceTree = "<group>"; };
 		5592E1761DB2555700A57FCD /* noImageFeedPageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noImageFeedPageTest.swift; sourceTree = "<group>"; };
+		55977BF01E37CF8400887E89 /* pushNotifications.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pushNotifications.PNG; sourceTree = "<group>"; };
 		55A136E51DAE25AC001AB95A /* connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = connection.swift; sourceTree = "<group>"; };
 		55C300C61E2BE3DB0012BAB5 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		55D0C3E61DF993C6003BEB0B /* ieee_logo-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ieee_logo-2.png"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				55DEF0181DFBD07900461F18 /* post.PNG */,
 				55DEF01A1DFBD07E00461F18 /* event.PNG */,
 				55DEF01C1DFBD08400461F18 /* home.PNG */,
+				55977BF01E37CF8400887E89 /* pushNotifications.PNG */,
 			);
 			name = Screenshots;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				55F1F8BF1DAB671500B93D50 /* Assets.xcassets in Resources */,
 				5532F52C1E17FD8100AF8FD8 /* eventsRefresher.png in Resources */,
 				55D0C3ED1DF9EA81003BEB0B /* heart.png in Resources */,
+				55977BF11E37CF8400887E89 /* pushNotifications.PNG in Resources */,
 				55DEF01B1DFBD07E00461F18 /* event.PNG in Resources */,
 				55F1F8BD1DAB671500B93D50 /* Main.storyboard in Resources */,
 				5541F32C1DB026FB00846335 /* ic_thumb_up_3x.png in Resources */,
