@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Toast.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UIActivityIndicator-for-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +57,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0D5F197C8F0B1AC984A38FE638ED1C92</key>
+		<key>1354EBC2BC841E081A62B7783194B094</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>17CEAD1B3EC4E80098DF5F8AA00BE966</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4C2F8319FFA8CA7476F0DE16A0BF04BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FBBE3BE90DE41E6DEBC28F45162B4260</key>
+		<key>F91992A3378EF6983D1BAA9D8E3A5675</key>
 		<dict>
 			<key>primary</key>
 			<true/>

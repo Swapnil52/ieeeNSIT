@@ -9,6 +9,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - Toast (3.1.0)
   - UIActivityIndicator-for-SDWebImage (1.2):
     - SDWebImage (~> 3.7)
 
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - MWPhotoBrowser (~> 2.1)
   - NYAlertViewController
   - SDWebImage (~> 3.7)
+  - Toast (~> 3.1)
   - UIActivityIndicator-for-SDWebImage
 
 SPEC CHECKSUMS:
@@ -25,8 +27,9 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   NYAlertViewController: b93f82e2c1fc6d5e9485512ddbe7b481f463a074
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+  Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-PODFILE CHECKSUM: 41d2daa5fead50366881787a04e33e7a36fcaa7b
+PODFILE CHECKSUM: 4f71d78d876b6e42a6cc7863d3e5c0368e310181
 
 COCOAPODS: 1.1.1

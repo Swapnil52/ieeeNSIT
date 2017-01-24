@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast
 
 class eventsViewController : UIViewController {
     
@@ -50,6 +51,10 @@ class eventsViewController : UIViewController {
         spinner.hidesWhenStopped = true
         self.mainView.addSubview(spinner)
         spinner.startAnimating()
+        
+        //show toasts
+        self.view.makeToast("Swipe to view events!", duration: 0.7, position: CSToastPositionBottom)
+        self.view.makeToast("Swipe down to refresh!", duration: 0.7, position: CSToastPositionBottom)
         
         downloadEvents { (success, events, count) in
             

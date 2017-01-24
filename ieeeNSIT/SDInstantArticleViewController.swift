@@ -89,7 +89,7 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
         
         //setting up the image view and adding it to the scroll view as a subview
         imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.scrollView.bounds.width, height: 200))
-        imageView.backgroundColor = UIColor.clear
+        imageView.backgroundColor = UIColor(red: 61/255, green: 78/255, blue: 245/255, alpha: 1)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         scrollView.addSubview(imageView)

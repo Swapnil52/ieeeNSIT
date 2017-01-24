@@ -35,6 +35,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        
+        //send the device token to our server
+        var request = URLRequest(url: URL(string: "http://fgethell.xyz/iospush/iospush.php?token=\(deviceTokenString)")!)
+        request.httpMethod = "POST"
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error
+            {
+                
+                DispatchQueue.main.async(execute: { 
+                    
+                    print(error.localizedDescription)
+                    
+                })
+                
+                
+            }
+            else
+            {
+                DispatchQueue.main.async(execute: { 
+                    
+                    if let data = data
+                    {
+                        
+                        let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+                        print(dataString!)
+                    }
+                    
+                })
+            }
+            
+            
+        }
+        task.resume()
+        
         print(deviceTokenString)
         
     }
@@ -60,7 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        
+        application.applicationIconBadgeNumber = 0
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

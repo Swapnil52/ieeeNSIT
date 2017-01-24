@@ -451,7 +451,6 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         if Reachability.isConnectedToNetwork() == true
         {
             
-            self.s.startAnimating()
             self.downloadData(url: url) { (success, jsonData) in
                 
                 DispatchQueue.main.async(execute: { 
