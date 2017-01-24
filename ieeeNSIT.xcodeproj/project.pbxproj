@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36648747A287F45FAB13790B /* Pods_ieeeNSIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B85972A564AA03470CD8B3 /* Pods_ieeeNSIT.framework */; };
+		0EB73EB37E08DB06675BD562 /* Pods_ieeeNSIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F35AFAE59B36F49C7D2DCA2 /* Pods_ieeeNSIT.framework */; };
 		55170DD11DAFFE62008457F0 /* ieeeNoImageFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55170DD01DAFFE62008457F0 /* ieeeNoImageFeedCell.swift */; };
 		5523DF1D1DAFC307005046B9 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5523DF1C1DAFC307005046B9 /* color.swift */; };
 		5523DF1F1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5523DF1E1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png */; };
@@ -38,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F35AFAE59B36F49C7D2DCA2 /* Pods_ieeeNSIT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ieeeNSIT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55170DD01DAFFE62008457F0 /* ieeeNoImageFeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ieeeNoImageFeedCell.swift; sourceTree = "<group>"; };
 		5523DF1C1DAFC307005046B9 /* color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		5523DF1E1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_thumb_up_black_48dp_2x.png; sourceTree = "<group>"; };
@@ -68,9 +69,8 @@
 		55F1F8BE1DAB671500B93D50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55F1F8C11DAB671500B93D50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55F1F8C31DAB671500B93D50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		994B243554196F4FDDEB4B7F /* Pods-ieeeNSIT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ieeeNSIT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ieeeNSIT/Pods-ieeeNSIT.debug.xcconfig"; sourceTree = "<group>"; };
-		C7B85972A564AA03470CD8B3 /* Pods_ieeeNSIT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ieeeNSIT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C865100E285BFDCABD7A35A3 /* Pods-ieeeNSIT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ieeeNSIT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ieeeNSIT/Pods-ieeeNSIT.release.xcconfig"; sourceTree = "<group>"; };
+		97FD9E792CC18284AA5572F7 /* Pods-ieeeNSIT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ieeeNSIT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ieeeNSIT/Pods-ieeeNSIT.debug.xcconfig"; sourceTree = "<group>"; };
+		B2A142A6AE80190CEA534A36 /* Pods-ieeeNSIT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ieeeNSIT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ieeeNSIT/Pods-ieeeNSIT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,13 +78,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36648747A287F45FAB13790B /* Pods_ieeeNSIT.framework in Frameworks */,
+				0EB73EB37E08DB06675BD562 /* Pods_ieeeNSIT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		536D2ED20AE91AB280C15835 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97FD9E792CC18284AA5572F7 /* Pods-ieeeNSIT.debug.xcconfig */,
+				B2A142A6AE80190CEA534A36 /* Pods-ieeeNSIT.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5523DF201DAFC792005046B9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +126,8 @@
 			children = (
 				55F1F8B41DAB671500B93D50 /* ieeeNSIT */,
 				55F1F8B31DAB671500B93D50 /* Products */,
-				EA984FBE1ED28CFC22CF977F /* Pods */,
-				D322D0C9743DFAD9CEFF2366 /* Frameworks */,
+				536D2ED20AE91AB280C15835 /* Pods */,
+				8E89488F91126BD256F85DF6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,21 +172,12 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		D322D0C9743DFAD9CEFF2366 /* Frameworks */ = {
+		8E89488F91126BD256F85DF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C7B85972A564AA03470CD8B3 /* Pods_ieeeNSIT.framework */,
+				2F35AFAE59B36F49C7D2DCA2 /* Pods_ieeeNSIT.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EA984FBE1ED28CFC22CF977F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				994B243554196F4FDDEB4B7F /* Pods-ieeeNSIT.debug.xcconfig */,
-				C865100E285BFDCABD7A35A3 /* Pods-ieeeNSIT.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,12 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55F1F8C61DAB671500B93D50 /* Build configuration list for PBXNativeTarget "ieeeNSIT" */;
 			buildPhases = (
-				9605222D26DE316A51415E81 /* Check Pods Manifest.lock */,
+				C1BB8B04E5264A44CA908426 /* [CP] Check Pods Manifest.lock */,
 				55F1F8AE1DAB671500B93D50 /* Sources */,
 				55F1F8AF1DAB671500B93D50 /* Frameworks */,
 				55F1F8B01DAB671500B93D50 /* Resources */,
-				EBCA57A04A6C90587110AD20 /* Embed Pods Frameworks */,
-				52405B370E2035E4069BBCC5 /* Copy Pods Resources */,
+				22328A31B1CD8B2F0AF98F57 /* [CP] Embed Pods Frameworks */,
+				0F0B7A02E4D90AC8BA122EE5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,14 +270,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		52405B370E2035E4069BBCC5 /* Copy Pods Resources */ = {
+		0F0B7A02E4D90AC8BA122EE5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,34 +285,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ieeeNSIT/Pods-ieeeNSIT-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9605222D26DE316A51415E81 /* Check Pods Manifest.lock */ = {
+		22328A31B1CD8B2F0AF98F57 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		EBCA57A04A6C90587110AD20 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ieeeNSIT/Pods-ieeeNSIT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1BB8B04E5264A44CA908426 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -360,6 +360,7 @@
 /* Begin XCBuildConfiguration section */
 		55F1F8C41DAB671500B93D50 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97FD9E792CC18284AA5572F7 /* Pods-ieeeNSIT.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -410,6 +411,7 @@
 		};
 		55F1F8C51DAB671500B93D50 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2A142A6AE80190CEA534A36 /* Pods-ieeeNSIT.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -453,30 +455,36 @@
 		};
 		55F1F8C71DAB671500B93D50 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 994B243554196F4FDDEB4B7F /* Pods-ieeeNSIT.debug.xcconfig */;
+			baseConfigurationReference = 97FD9E792CC18284AA5572F7 /* Pods-ieeeNSIT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ieeeNSIT/ieeeNSIT.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3A9TH8N8KH;
 				INFOPLIST_FILE = ieeeNSIT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Swapnil-Dhanwal.ieeeNSIT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		55F1F8C81DAB671500B93D50 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C865100E285BFDCABD7A35A3 /* Pods-ieeeNSIT.release.xcconfig */;
+			baseConfigurationReference = B2A142A6AE80190CEA534A36 /* Pods-ieeeNSIT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ieeeNSIT/ieeeNSIT.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3A9TH8N8KH;
 				INFOPLIST_FILE = ieeeNSIT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Swapnil-Dhanwal.ieeeNSIT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

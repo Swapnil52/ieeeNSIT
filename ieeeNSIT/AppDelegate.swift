@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //Set up notifications
         let notificationsCenter = UNUserNotificationCenter.current()
         notificationsCenter.requestAuthorization(options: [.badge, .alert, .sound]) { (success, error) in
             
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         application.registerForRemoteNotifications()
+        
         return true
     }
     

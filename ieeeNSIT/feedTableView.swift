@@ -47,12 +47,9 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         
         let url = "https://graph.facebook.com/278952135548721/posts?limit=20&fields=id,full_picture,picture,from,shares,attachments,message,object_id,link,created_time,comments.limit(0).summary(true),likes.limit(0).summary(true)&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD"
         
-        
         s = UIActivityIndicatorView(frame: CGRect(x:self.view.bounds.width/2-100, y:self.view.bounds.height/2-50-100, width:200, height:200))
         s.activityIndicatorViewStyle = .gray
         s.hidesWhenStopped = true
-        s.layer.cornerRadius = 10
-        s.backgroundColor = UIColor.lightText
         self.view.addSubview(s)
         
         //configure the refresher
@@ -60,7 +57,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         configureRefresher()
         self.view.addSubview(refresher)
         
-        //configure the navigation bar spinner 
+        //configure the navigation bar spinner
         navSpinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navSpinner)
         navSpinner.hidesWhenStopped = true
@@ -99,6 +96,63 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                     })
                     
                 }
+                else
+                {
+                    
+                    do
+                    {
+                        
+                        try self.loadData()
+                        self.s.stopAnimating()
+                        
+                    }
+                    catch
+                    {
+                        
+                        self.s.startAnimating()
+                        self.downloadData(url: url, completionHandler: { (success, jsonData) in
+                            
+                            if success == true
+                            {
+                                
+                                DispatchQueue.main.async(execute: {
+                                    
+                                    self.parseJSON(jsonData: jsonData)
+                                    self.saveData()
+                                    self.isRefresherAnimating = false
+                                    self.s.stopAnimating()
+                                    UIView.setAnimationsEnabled(false)
+                                    CATransaction.begin()
+                                    self.tableView.reloadData()
+                                    CATransaction.commit()
+                                    CATransaction.setCompletionBlock { () -> Void in
+                                        
+                                        UIView.setAnimationsEnabled(true)
+                                    }
+                                    self.isRefresherAnimating = true
+                                    self.tableView.isHidden = false
+                                    
+                                })
+                                
+                            }
+                            else
+                            {
+                                DispatchQueue.main.async(execute: {
+                                    
+                                    self.s.stopAnimating()
+                                    self.showPlaceholder()
+                                    
+                                })
+                                
+                            }
+                            
+                        })
+                        
+                        
+                    }
+
+                    
+                }
                 
             })
 
@@ -110,6 +164,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
             {
     
                 try loadData()
+                s.stopAnimating()
                 
             }
             catch
@@ -157,49 +212,6 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                 
             }
         }
-        
-//        do
-//        {
-//            
-//            try loadData()
-//            
-//        }
-//        catch
-//        {
-//            
-//            if Reachability.isConnectedToNetwork() == true
-//            {
-//                
-//                s.startAnimating()
-//                downloadData(url: url, completionHandler: { (success, jsonData) in
-//                    
-//                    if success == true
-//                    {
-//                        
-//                        DispatchQueue.main.async(execute: { 
-//                            
-//                            self.parseJSON(jsonData: jsonData)
-//                            self.saveData()
-//                            self.isRefresherAnimating = false
-//                            UIView.setAnimationsEnabled(false)
-//                            CATransaction.begin()
-//                            self.tableView.reloadData()
-//                            CATransaction.commit()
-//                            CATransaction.setCompletionBlock { () -> Void in
-//                                
-//                                UIView.setAnimationsEnabled(true)
-//                            }
-//                            self.isRefresherAnimating = true
-//                            self.tableView.isHidden = false
-//                            self.s.stopAnimating()
-//                        })
-//                        
-//                    }
-//                    
-//                })
-//                
-//            }
-//        }
         
     }
     
@@ -440,7 +452,6 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         {
             
             self.s.startAnimating()
-            
             self.downloadData(url: url) { (success, jsonData) in
                 
                 DispatchQueue.main.async(execute: { 
@@ -478,8 +489,8 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         }
         else
         {
-            
-            let alert = UIAlertController(title: "Internet Connection Unavailable", message: "Please retry when the internet connection is established", preferredStyle: .alert)
+             
+            let alert = UIAlertController(title: "An Error Occurred", message: "The internet connection seems to be offline", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 
                 if self.refresher.isRefreshing
