@@ -33,6 +33,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
     var browser = MWPhotoBrowser()
     var statusBlurView = UIVisualEffectView()
     var placeholderImageView = UIImageView()
+    var toast : SwapToastView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,20 +79,22 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
 
                     DispatchQueue.main.async(execute: {
 
-                        self.parseJSON(jsonData: jsonData)
-                        self.saveData()
-                        self.isRefresherAnimating = false
-                        self.s.stopAnimating()
-                        UIView.setAnimationsEnabled(false)
-                        CATransaction.begin()
-                        self.tableView.reloadData()
-                        CATransaction.commit()
-                        CATransaction.setCompletionBlock { () -> Void in
+                        self.toast = SwapToastView("Pull down to refresh!", UIColor(red : 61/255, green : 78/255, blue : 245/255, alpha : 1), UIColor.white, 2, completion: { 
+                            
+                            self.toast.removeFromSuperview()
+                            self.parseJSON(jsonData: jsonData)
+                            self.saveData()
+                            self.isRefresherAnimating = false
+                            self.s.stopAnimating()
+                            self.tableView.reloadData()
+                            self.isRefresherAnimating = true
+                            self.tableView.isHidden = false
 
-                            UIView.setAnimationsEnabled(true)
-                        }
-                        self.isRefresherAnimating = true
-                        self.tableView.isHidden = false
+                            
+                        })
+                        self.toast.layer.borderWidth = 0.5
+                        self.toast.layer.borderColor = UIColor.white.cgColor
+                        self.view.addSubview(self.toast)
                         
                     })
                     

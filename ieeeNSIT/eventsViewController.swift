@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Toast
+import SDWebImage
 
 class eventsViewController : UIViewController {
     
@@ -27,6 +27,9 @@ class eventsViewController : UIViewController {
     var retryButton = UIButton()
     var refreshView = UIView()
     var refreshImageView = UIImageView()
+    var eventIds = [String]()
+    var toast : SwapToastView!
+    var pageIndexLabel = UILabel()
     
     override func viewDidLoad() {
         
@@ -52,9 +55,13 @@ class eventsViewController : UIViewController {
         self.mainView.addSubview(spinner)
         spinner.startAnimating()
         
-        //show toasts
-        self.view.makeToast("Swipe to view events!", duration: 0.7, position: CSToastPositionBottom)
-        self.view.makeToast("Swipe down to refresh!", duration: 0.7, position: CSToastPositionBottom)
+        //setting up the pageIndexLabel
+        self.pageIndexLabel = UILabel(frame: CGRect(x: self.view.bounds.width/2-30, y: self.mainView.frame.maxY-10, width: 60, height: 20))
+        self.pageIndexLabel.text = "\(self.index+1)/5"
+        self.pageIndexLabel.font = UIFont(name: "Avenir Book", size: 15)
+        self.pageIndexLabel.textAlignment = .center
+        self.view.addSubview(self.pageIndexLabel)
+
         
         downloadEvents { (success, events, count) in
             
@@ -62,12 +69,32 @@ class eventsViewController : UIViewController {
             {
                 self.count = count
                 self.events = events
-                self.spinner.stopAnimating()
-                self.displayEvent(self.index, completionHandler: {
+                print (events)
+
+                //show toasts
+                self.toast = SwapToastView("Swipe to view events!", UIColor(red : 61/255, green : 78/255, blue : 245/255, alpha : 1), UIColor.white, 2, completion: {
                     
-                    self.swipeEnabled = true
+                    self.toast.removeFromSuperview()
+                    self.toast = SwapToastView("Pull down to refresh!", UIColor(red : 61/255, green : 78/255, blue : 245/255, alpha : 1), UIColor.white, 2, completion: {
+                        
+                        self.toast.removeFromSuperview()
+                        self.spinner.stopAnimating()
+                        self.displayEvent(self.index, completionHandler: {
+                            
+                            self.swipeEnabled = true
+                            
+                        })
+                        
+                    })
+                    self.toast.layer.borderColor = UIColor.white.cgColor
+                    self.toast.layer.borderWidth = 0.5
+                    self.view.addSubview(self.toast)
                     
                 })
+                self.toast.layer.borderColor = UIColor.white.cgColor
+                self.toast.layer.borderWidth = 0.5
+                self.view.addSubview(self.toast)
+                
             }
             
             else
@@ -99,10 +126,11 @@ class eventsViewController : UIViewController {
         pan = UIPanGestureRecognizer(target: self, action: #selector(eventsViewController.drag(gesture:)))
         self.mainView.addGestureRecognizer(pan)
         self.mainView.isUserInteractionEnabled = true
+        
 
     }
     
-    func displayEvent(_ i : Int, completionHandler : () -> Void)
+    func displayEvent(_ i : Int, completionHandler : @escaping () -> Void)
     {
         
         for view in self.mainView.subviews
@@ -113,42 +141,79 @@ class eventsViewController : UIViewController {
             }
         }
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.mainView.bounds.width, height: self.mainView.bounds.height * 0.3))
-        imageView.backgroundColor = getColor(red: 68, green: 74, blue: 236)
-        imageView.clipsToBounds = true
-        self.mainView.addSubview(imageView)
-        
-        lineLabel = UILabel(frame: CGRect(x: 0, y: self.imageView.frame.maxY, width: self.mainView.frame.width, height: 3))
-        lineLabel.backgroundColor = getColor(red: 37, green: 50, blue: 55)
-        self.mainView.addSubview(lineLabel)
-        
-        nameLabel = UILabel(frame: CGRect(x: 10, y: self.lineLabel.frame.maxY + 10, width: self.mainView.frame.width * 0.35, height: 30))
+        if self.events[self.index].count > 0
+        {
+            let cover = self.events[self.index]["cover"]
+            if let source = cover?["source"] as? String
+            {
+                
+                let currentImageURL =  URL(string: source)
+                print(source)
+                //cancel current image download, if extant
+                self.imageView.sd_cancelCurrentImageLoad()
+                self.imageView.contentMode = .scaleAspectFill
+                self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.mainView.bounds.width, height: self.mainView.bounds.height * 0.3))
+                self.imageView.backgroundColor = getColor(red: 68, green: 74, blue: 236)
+                self.imageView.clipsToBounds = true
+                self.imageView.setShowActivityIndicator(true)
+                self.imageView.setIndicatorStyle(.whiteLarge)
+                self.imageView.sd_setImage(with: currentImageURL) { (image, error, cache, url) in
+                    
+                    //do something
+                    
+                }
+
+                
+            }
+            
+        }
+        self.mainView.addSubview(self.imageView)
+
+        self.lineLabel = UILabel(frame: CGRect(x: 0, y: self.imageView.frame.maxY, width: self.mainView.frame.width, height: 3))
+        self.lineLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
+        self.mainView.addSubview(self.lineLabel)
+
+        self.nameLabel = UILabel(frame: CGRect(x: 10, y: self.lineLabel.frame.maxY + 10, width: self.mainView.frame.width * 0.35, height: 30))
         if let f = UIFont(name: "Avenir Book", size: 13)
         {
-            let s = NSMutableAttributedString(string: "\(self.events[self.index]["event_name"]!)", attributes: [NSFontAttributeName : f])
+            let s = NSMutableAttributedString(string: "\(self.events[self.index]["name"] as! String)", attributes: [NSFontAttributeName : f])
+            self.nameLabel.numberOfLines = 0
             self.nameLabel.attributedText = s
         }
-        self.mainView.addSubview(nameLabel)
-        
-        dateLabel = UILabel(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 30))
+        self.mainView.addSubview(self.nameLabel)
+
+        self.dateLabel = UILabel(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 30))
+        let date = self.events[self.index]["start_time"] as! String
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
+        let newDate = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "dd-MMM-yy,HH:mm"
+        dateFormatter.amSymbol = "AM"
+        dateFormatter.pmSymbol = "PM"
+        let dateString = dateFormatter.string(from: newDate!)
+        self.dateLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
+        self.dateLabel.textAlignment = .center
         if let f = UIFont(name: "Avenir Book", size: 13)
         {
-            let s = NSMutableAttributedString(string: "\(self.events[self.index]["date"]!)", attributes: [NSFontAttributeName : f])
+            let s = NSMutableAttributedString(string: "\(dateString)", attributes: [NSFontAttributeName : f])
             self.dateLabel.attributedText = s
+            self.dateLabel.textColor = UIColor.white
         }
-        self.mainView.addSubview(dateLabel)
-        
-        textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY + 20, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 40)))
+        self.dateLabel.layer.cornerRadius = 3
+        self.mainView.addSubview(self.dateLabel)
+
+        self.textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY + 20, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 40)))
         if let f = UIFont(name: "Avenir Book", size: 15)
         {
             let s = NSMutableAttributedString(string: "\(self.events[self.index]["description"]!)", attributes: [NSFontAttributeName : f])
             self.textView.attributedText = s
         }
-        textView.isEditable = false
-        textView.dataDetectorTypes = .all
-        self.mainView.addSubview(textView)
+        self.textView.isEditable = false
+        self.textView.dataDetectorTypes = .all
+        self.mainView.addSubview(self.textView)
         
         completionHandler()
+
         
     }
     
@@ -220,10 +285,11 @@ class eventsViewController : UIViewController {
 
     }
     
+    
+    
     func downloadEvents(completionHandler : @escaping (_ success : Bool, _ array : [[String:AnyObject]], _ count : Int) -> Void)
     {
-        let url = URL(string: "http://ieeensit.org/appevents.json")
-//        let url = URL(string: "https://api.myjson.com/bins/pz64v")
+        let url = URL(string: "https://graph.facebook.com/v2.5/278952135548721/events?limit=5&fields=name,start_time,description,cover&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD")
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if let error = error
@@ -254,13 +320,10 @@ class eventsViewController : UIViewController {
                             if let jsonData = jsonData as? [String : AnyObject]
                             {
                                 
-                                if let total = jsonData["Total"] as? String
+                                if let data = jsonData["data"] as? [[String:AnyObject]]
                                 {
                                     
-                                    if let array = jsonData["events"] as? [[String : AnyObject]]
-                                    {
-                                         completionHandler(true, array, Int(total)!)
-                                    }
+                                    completionHandler(true, data, data.count)
                                     
                                 }
                                 else
@@ -282,6 +345,13 @@ class eventsViewController : UIViewController {
             
         }
         task.resume()
+        
+    }
+    
+    func updatePageIndex()
+    {
+        
+        self.pageIndexLabel.text = "\(self.index+1)/5"
         
     }
     
@@ -359,6 +429,7 @@ class eventsViewController : UIViewController {
                 self.mainView.layer.transform = CATransform3DIdentity
                 self.mainView.layer.transform = CATransform3DMakeTranslation(1000, 0, 0)
                 self.index += 1
+                self.updatePageIndex()
                 self.displayEvent(self.index, completionHandler: { 
                     
                 })
@@ -391,6 +462,7 @@ class eventsViewController : UIViewController {
     
     func swipeRight(_ gesture : UIPanGestureRecognizer)
     {
+        
         if self.index > 0 && self.swipeEnabled == true
         {
             UIView.animate(withDuration: 0.4, animations: {
@@ -406,6 +478,7 @@ class eventsViewController : UIViewController {
                 self.mainView.layer.transform = CATransform3DIdentity
                 self.mainView.layer.transform = CATransform3DMakeTranslation(-1000, 0, 0)
                 self.index -= 1
+                self.updatePageIndex()
                 self.displayEvent(self.index, completionHandler: { 
                     
                 })
@@ -417,6 +490,7 @@ class eventsViewController : UIViewController {
                     }, completion: { (success) in
                         
                         print(self.index)
+                        
                 })
             }
         }
