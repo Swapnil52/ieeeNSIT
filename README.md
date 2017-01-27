@@ -34,15 +34,15 @@ Popular asynchronous image downloading library (https://github.com/rs/SDWebImage
 Versatile library to show images, videos and albums in iOS apps (https://github.com/mwaterfall/MWPhotoBrowser)
 
 ##APIs used
-###1. Facebook Graph api
+###1. Facebook Graph api for page posts
 ```
 https://graph.facebook.com/(Insert Page ID )/posts?limit=20&fields=id,full_picture,picture,from,shares,attachments,message,object_id,link,created_time,comments.limit(0).summary(true),likes.limit(0).summary(true)&access_token=(Insert API Key)
 ```
 To fetch JSON data of a particular page, plug in the page id in the format shown above and you're good to go! For example, the page ID of IEEE NSIT is 278952135548721
 
-###2. IEEE NSIT events api
+###2. Facebook Graph api for events
 ```
-http://ieeensit.org/appevents.json
+https://graph.facebook.com/v2.5/278952135548721/events?limit=5&fields=name,start_time,description,cover&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD
 ```
 Returns JSON data containing recent and upcoming events organised by IEEE NSIT.
 
