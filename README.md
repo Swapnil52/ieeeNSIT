@@ -42,7 +42,7 @@ To fetch JSON data of a particular page, plug in the page id in the format shown
 
 ###2. Facebook Graph api for events
 ```
-https://graph.facebook.com/v2.5/278952135548721/events?limit=5&fields=name,start_time,description,cover&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD
+https://graph.facebook.com/v2.5/(Insert Page ID)/events?limit=5&fields=name,start_time,description,cover&access_token=(Insert API Key)
 ```
 Returns JSON data containing recent and upcoming events organised by IEEE NSIT.
 
