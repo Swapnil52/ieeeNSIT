@@ -8,10 +8,12 @@
 
 import UIKit
 import SDWebImage
+import EventKit
 
 class eventsViewController : UIViewController {
     
     var mainView = UIView()
+    var shadowView = UIView()
     var blurView  = UIVisualEffectView()
     var imageView = UIImageView()
     var textView = UITextView()
@@ -49,14 +51,17 @@ class eventsViewController : UIViewController {
         self.view.addSubview(refreshView)
         
         showMainView()
+        //setting up the spinner
         spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        spinner.frame = CGRect(x: self.mainView.bounds.width/2 - 50, y: self.mainView.bounds.height/2 - 50, width: 100, height: 100)
+        let frame = CGRect(x: self.mainView.bounds.width/2 - 50, y: self.mainView.bounds.height/2 - 50, width: 100, height: 100)
+        spinner.frame = frame
         spinner.hidesWhenStopped = true
-        self.mainView.addSubview(spinner)
         spinner.startAnimating()
+        spinner.color = getColor(red: 61, green: 78, blue: 245)
+        self.mainView.addSubview(spinner)
         
         //setting up the pageIndexLabel
-        self.pageIndexLabel = UILabel(frame: CGRect(x: self.view.bounds.width/2-30, y: self.mainView.frame.maxY-10, width: 60, height: 20))
+        self.pageIndexLabel = UILabel(frame: CGRect(x: self.view.bounds.width/2-30, y: self.mainView.frame.maxY-30, width: 60, height: 20))
         self.pageIndexLabel.text = "\(self.index+1)/5"
         self.pageIndexLabel.font = UIFont(name: "Avenir Book", size: 15)
         self.pageIndexLabel.textAlignment = .center
@@ -69,8 +74,7 @@ class eventsViewController : UIViewController {
             {
                 self.count = count
                 self.events = events
-                print (events)
-
+                
                 //show toasts
                 self.toast = SwapToastView("Swipe to view events!", UIColor(red : 61/255, green : 78/255, blue : 245/255, alpha : 1), UIColor.white, 2, completion: {
                     
@@ -112,15 +116,14 @@ class eventsViewController : UIViewController {
         
         //setting up the main view. Add subviews to this view as desired.
         mainView.layer.cornerRadius = 10
-        mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.90/2, y: self.view.bounds.height/2-self.view.bounds.height*0.90/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
-        mainView.layer.borderWidth = 0.5
+        mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
+        mainView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+        mainView.layer.shadowPath = UIBezierPath(roundedRect: self.mainView.bounds, cornerRadius: 10).cgPath
+        mainView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
+        mainView.layer.shadowOpacity = 0.4
+        mainView.layer.shadowRadius = 5
+        mainView.layer.masksToBounds = false
         self.view.addSubview(mainView)
-        
-        //setting up the blur view
-        let blur = UIBlurEffect(style: .light)
-        blurView = UIVisualEffectView(effect: blur)
-        blurView.frame = self.mainView.bounds
-        self.mainView.addSubview(blurView)
         
         //setting up the pan gesture recogniser
         pan = UIPanGestureRecognizer(target: self, action: #selector(eventsViewController.drag(gesture:)))
@@ -148,18 +151,23 @@ class eventsViewController : UIViewController {
             {
                 
                 let currentImageURL =  URL(string: source)
-                print(source)
                 //cancel current image download, if extant
                 self.imageView.sd_cancelCurrentImageLoad()
-                self.imageView.contentMode = .scaleAspectFill
+                self.imageView.contentMode = .scaleToFill
                 self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.mainView.bounds.width, height: self.mainView.bounds.height * 0.3))
                 self.imageView.backgroundColor = getColor(red: 68, green: 74, blue: 236)
-                self.imageView.clipsToBounds = true
                 self.imageView.setShowActivityIndicator(true)
                 self.imageView.setIndicatorStyle(.whiteLarge)
+                
+                //round upper corners
+                let maskLayer = CAShapeLayer()
+                maskLayer.path = UIBezierPath(roundedRect: self.imageView.bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight], cornerRadii: CGSize(width: 10, height: 10)).cgPath
+                self.imageView.layer.mask = maskLayer
+                
                 self.imageView.sd_setImage(with: currentImageURL) { (image, error, cache, url) in
                     
                     //do something
+                    self.imageView.clipsToBounds = false
                     
                 }
 
@@ -168,48 +176,55 @@ class eventsViewController : UIViewController {
             
         }
         self.mainView.addSubview(self.imageView)
+        self.mainView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
 
         self.lineLabel = UILabel(frame: CGRect(x: 0, y: self.imageView.frame.maxY, width: self.mainView.frame.width, height: 3))
         self.lineLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
         self.mainView.addSubview(self.lineLabel)
 
-        self.nameLabel = UILabel(frame: CGRect(x: 10, y: self.lineLabel.frame.maxY + 10, width: self.mainView.frame.width * 0.35, height: 30))
-        if let f = UIFont(name: "Avenir Book", size: 13)
-        {
-            let s = NSMutableAttributedString(string: "\(self.events[self.index]["name"] as! String)", attributes: [NSFontAttributeName : f])
-            self.nameLabel.numberOfLines = 0
-            self.nameLabel.attributedText = s
-        }
-        self.mainView.addSubview(self.nameLabel)
-
-        self.dateLabel = UILabel(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 30))
+        self.dateLabel = UILabel(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 40))
         let date = self.events[self.index]["start_time"] as! String
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
         let newDate = dateFormatter.date(from: date)
-        dateFormatter.dateFormat = "dd-MMM-yy,HH:mm"
+        dateFormatter.dateFormat = "dd-MM-yy,HH:mm"
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
         let dateString = dateFormatter.string(from: newDate!)
-        self.dateLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
         self.dateLabel.textAlignment = .center
         if let f = UIFont(name: "Avenir Book", size: 13)
         {
             let s = NSMutableAttributedString(string: "\(dateString)", attributes: [NSFontAttributeName : f])
             self.dateLabel.attributedText = s
-            self.dateLabel.textColor = UIColor.white
+            self.dateLabel.textColor = UIColor.black
         }
-        self.dateLabel.layer.cornerRadius = 3
+        self.dateLabel.layer.cornerRadius = 5
+        self.dateLabel.clipsToBounds = true
         self.mainView.addSubview(self.dateLabel)
+        
+        self.nameLabel = UILabel(frame: CGRect(x: 10, y: self.lineLabel.frame.maxY + 10, width: self.mainView.frame.width*0.50, height: 40))
+        if let f = UIFont(name: "Avenir Book", size: 13)
+        {
+            let s = NSMutableAttributedString(string: "\(self.events[self.index]["name"] as! String)", attributes: [NSFontAttributeName : f])
+            self.nameLabel.numberOfLines = -1
+            self.nameLabel.attributedText = s
+            self.nameLabel.textColor = UIColor.black
 
-        self.textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY + 20, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 40)))
-        if let f = UIFont(name: "Avenir Book", size: 15)
+        }
+        self.mainView.addSubview(self.nameLabel)
+        
+        self.textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 5)))
+        self.textView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+        
+        if let f = UIFont(name: "Avenir Book", size: 20)
         {
             let s = NSMutableAttributedString(string: "\(self.events[self.index]["description"]!)", attributes: [NSFontAttributeName : f])
             self.textView.attributedText = s
+            self.textView.textColor = UIColor.black
         }
         self.textView.isEditable = false
         self.textView.dataDetectorTypes = .all
+        self.textView.layer.cornerRadius = 5
         self.mainView.addSubview(self.textView)
         
         completionHandler()
@@ -257,8 +272,11 @@ class eventsViewController : UIViewController {
         showMainView()
         spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         spinner.frame = CGRect(x: self.mainView.bounds.width/2 - 50, y: self.mainView.bounds.height/2 - 50, width: 100, height: 100)
+        spinner.color = getColor(red: 61, green: 78, blue: 245)
         spinner.hidesWhenStopped = true
         self.mainView.addSubview(spinner)
+        
+
         spinner.startAnimating()
         
         downloadEvents { (success, events, count) in
@@ -271,6 +289,7 @@ class eventsViewController : UIViewController {
                 self.displayEvent(self.index, completionHandler: {
                     
                     self.swipeEnabled = true
+                    self.updatePageIndex()
                     
                 })
             }
@@ -441,7 +460,6 @@ class eventsViewController : UIViewController {
                     }, completion: { (success) in
                         
                         
-                        print(self.index)
                 })
                 
             }
@@ -489,7 +507,6 @@ class eventsViewController : UIViewController {
                     
                     }, completion: { (success) in
                         
-                        print(self.index)
                         
                 })
             }
@@ -510,7 +527,11 @@ class eventsViewController : UIViewController {
     override func viewWillLayoutSubviews() {
         
         mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
-        self.mainView.clipsToBounds = true
+        mainView.layer.shadowPath = UIBezierPath(roundedRect: self.mainView.bounds, cornerRadius: 10).cgPath
+        mainView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
+        mainView.layer.shadowOpacity = 0.4
+        mainView.layer.shadowRadius = 5
+//        self.mainView.clipsToBounds = true
         
     }
     

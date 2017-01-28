@@ -661,8 +661,8 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         
             let cm = colorManager()
             
-            var colorArray = [cm.colorRgb(red: 31, green: 161, blue: 204), cm.colorRgb(red: 99, green: 139, blue: 153), cm.colorRgb(red: 17, green: 255, blue: 185), cm.colorRgb(red: 252, green: 152, blue: 144), cm.colorRgb(red: 204, green: 10, blue: 59)]
-            UIView.animate(withDuration: 0.3, animations: { 
+            var colorArray = [cm.colorRgb(red: 61, green: 78, blue: 245), UIColor.white]
+            UIView.animate(withDuration: 0.3, animations: {
                 
                 self.refresher.backgroundColor = colorArray[colorIndex]
                 if let font = UIFont(name: "Avenir Next", size: 27)
@@ -674,13 +674,13 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                 if colorIndex%2 == 0
                 {
                     
-                    self.refresherLabel.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1)
+                    self.refresherLabel.textColor = UIColor.white
                     
                 }
                 else
                 {
                     
-                    self.refresherLabel.layer.transform = CATransform3DIdentity
+                    self.refresherLabel.textColor = UIColor.black
                     
                 }
                 
@@ -1001,7 +1001,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
             cell.shadowView.layer.shadowPath = path.cgPath
             cell.shadowView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
             cell.shadowView.layer.shadowOpacity = 0.3
-            let url = URL(string: imurl)
+            let url = URL(string: imurl) 
             cell.img.setShowActivityIndicator(true)
             cell.img.setIndicatorStyle(UIActivityIndicatorViewStyle.whiteLarge)
             cell.img.sd_setImage(with: url, completed: { (image, error, cache, url) in

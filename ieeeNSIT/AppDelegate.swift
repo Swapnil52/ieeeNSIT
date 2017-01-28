@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import EventKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         application.registerForRemoteNotifications()
-    
+        
+        //set up calender access
+        
         return true
     }
     

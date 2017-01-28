@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ieeeNSIT/eventsViewController.swift"
-            timestampString = "507159752.282063"
+            timestampString = "507316245.953694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "drag(gesture:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ieeeNSIT/eventsViewController.swift"
-            timestampString = "507159752.282063"
+            timestampString = "507316245.953694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
             landmarkName = "drag(gesture:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ieeeNSIT/AppDelegate.swift"
-            timestampString = "507143946.98991"
+            timestampString = "507226571.557993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "applicationWillResignActive(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ieeeNSIT/eventsViewController.swift"
-            timestampString = "507157035.002853"
+            timestampString = "507315944.306652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "displayEvent(_:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
