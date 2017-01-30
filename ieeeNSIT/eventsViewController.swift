@@ -529,7 +529,7 @@ class eventsViewController : UIViewController {
         mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
         mainView.layer.shadowPath = UIBezierPath(roundedRect: self.mainView.bounds, cornerRadius: 10).cgPath
         mainView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
-        mainView.layer.shadowOpacity = 0.4
+        mainView.layer.shadowOpacity = 0.3
         mainView.layer.shadowRadius = 5
 //        self.mainView.clipsToBounds = true
         
