@@ -384,7 +384,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
                         self.nameLabel.backgroundColor = UIColor.clear
                         self.loginView.addSubview(self.nameLabel)
                         let name = UILabel(frame: CGRect(x: self.loginView.bounds.width*0.1, y: ieeeLabel.bounds.height+fy/2, width: self.loginView.bounds.width*0.8, height: fy/2))
-                        name.textColor = getColor(red: 61, green: 78, blue: 245)
+                        name.textColor = getColor(red: 37, green: 50, blue: 55)
                         let n = _name.capitalized
                         name.text = " \(n)"
                         name.backgroundColor = UIColor.white
@@ -415,7 +415,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
                         self.branchLabel.backgroundColor = UIColor.clear
                         self.loginView.addSubview(self.branchLabel)
                         let branch = UILabel(frame: CGRect(x: self.loginView.bounds.width*0.1, y: ieeeLabel.bounds.height+fy+fy/2+2*dy, width: self.loginView.bounds.width*0.8, height: fy/2))
-                        branch.textColor = getColor(red: 61, green: 78, blue: 245)
+                        branch.textColor = getColor(red: 37, green: 50, blue: 55)
                         let b = _branch.uppercased()
                         branch.text = " \(b)"
                         branch.backgroundColor = UIColor.white
@@ -440,7 +440,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
                         self.loginView.addSubview(self.membershipLabel)
                         
                         let membership = UILabel(frame: CGRect(x: self.loginView.bounds.width*0.1, y: ieeeLabel.bounds.height+2*fy+fy/2+4*dy, width: self.loginView.bounds.width*0.8, height: fy/2))
-                        membership.textColor = getColor(red: 61, green: 78, blue: 245)
+                        membership.textColor = getColor(red: 37, green: 50, blue: 55)
                         membership.text = " \(p!)"
                         membership.backgroundColor = UIColor.white
                         roundedCornerLayer = CAShapeLayer()

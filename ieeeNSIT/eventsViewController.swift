@@ -118,6 +118,7 @@ class eventsViewController : UIViewController {
         mainView.layer.cornerRadius = 10
         mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
         mainView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+//        mainView.backgroundColor = UIColor.white
         mainView.layer.shadowPath = UIBezierPath(roundedRect: self.mainView.bounds, cornerRadius: 10).cgPath
         mainView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
         mainView.layer.shadowOpacity = 0.4
@@ -177,6 +178,7 @@ class eventsViewController : UIViewController {
         }
         self.mainView.addSubview(self.imageView)
         self.mainView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+//        self.mainView.backgroundColor = UIColor.white
 
         self.lineLabel = UILabel(frame: CGRect(x: 0, y: self.imageView.frame.maxY, width: self.mainView.frame.width, height: 3))
         self.lineLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
@@ -196,7 +198,7 @@ class eventsViewController : UIViewController {
         {
             let s = NSMutableAttributedString(string: "\(dateString)", attributes: [NSFontAttributeName : f])
             self.dateLabel.attributedText = s
-            self.dateLabel.textColor = UIColor.black
+            self.dateLabel.textColor = getColor(red: 37, green: 50, blue: 55)
         }
         self.dateLabel.layer.cornerRadius = 5
         self.dateLabel.clipsToBounds = true
@@ -208,19 +210,20 @@ class eventsViewController : UIViewController {
             let s = NSMutableAttributedString(string: "\(self.events[self.index]["name"] as! String)", attributes: [NSFontAttributeName : f])
             self.nameLabel.numberOfLines = -1
             self.nameLabel.attributedText = s
-            self.nameLabel.textColor = UIColor.black
+            self.nameLabel.textColor = getColor(red: 37, green: 50, blue: 55)
 
         }
         self.mainView.addSubview(self.nameLabel)
         
         self.textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 5)))
         self.textView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+//        self.textView.backgroundColor = UIColor.white
         
         if let f = UIFont(name: "Avenir Book", size: 20)
         {
             let s = NSMutableAttributedString(string: "\(self.events[self.index]["description"]!)", attributes: [NSFontAttributeName : f])
             self.textView.attributedText = s
-            self.textView.textColor = UIColor.black
+            self.textView.textColor = getColor(red: 37, green: 50, blue: 55)
         }
         self.textView.isEditable = false
         self.textView.dataDetectorTypes = .all

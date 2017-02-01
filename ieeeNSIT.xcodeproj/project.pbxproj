@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0EB73EB37E08DB06675BD562 /* Pods_ieeeNSIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F35AFAE59B36F49C7D2DCA2 /* Pods_ieeeNSIT.framework */; };
+		5506B22B1E3F889B00B8589E /* gallery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5506B22A1E3F889B00B8589E /* gallery@2x.png */; };
 		55170DD11DAFFE62008457F0 /* ieeeNoImageFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55170DD01DAFFE62008457F0 /* ieeeNoImageFeedCell.swift */; };
 		5523DF1D1DAFC307005046B9 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5523DF1C1DAFC307005046B9 /* color.swift */; };
 		5523DF1F1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5523DF1E1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png */; };
@@ -38,6 +39,7 @@
 		55DEF0191DFBD07900461F18 /* post.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 55DEF0181DFBD07900461F18 /* post.PNG */; };
 		55DEF01B1DFBD07E00461F18 /* event.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 55DEF01A1DFBD07E00461F18 /* event.PNG */; };
 		55DEF01D1DFBD08400461F18 /* home.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 55DEF01C1DFBD08400461F18 /* home.PNG */; };
+		55E3D7441E40D6580011761E /* galleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E3D7431E40D6580011761E /* galleryViewController.swift */; };
 		55F1F8B61DAB671500B93D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F1F8B51DAB671500B93D50 /* AppDelegate.swift */; };
 		55F1F8BD1DAB671500B93D50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F1F8BB1DAB671500B93D50 /* Main.storyboard */; };
 		55F1F8BF1DAB671500B93D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55F1F8BE1DAB671500B93D50 /* Assets.xcassets */; };
@@ -46,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		2F35AFAE59B36F49C7D2DCA2 /* Pods_ieeeNSIT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ieeeNSIT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5506B22A1E3F889B00B8589E /* gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gallery@2x.png"; sourceTree = "<group>"; };
 		55170DD01DAFFE62008457F0 /* ieeeNoImageFeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ieeeNoImageFeedCell.swift; sourceTree = "<group>"; };
 		5523DF1C1DAFC307005046B9 /* color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		5523DF1E1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_thumb_up_black_48dp_2x.png; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		55DEF0181DFBD07900461F18 /* post.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post.PNG; sourceTree = "<group>"; };
 		55DEF01A1DFBD07E00461F18 /* event.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event.PNG; sourceTree = "<group>"; };
 		55DEF01C1DFBD08400461F18 /* home.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.PNG; sourceTree = "<group>"; };
+		55E3D7431E40D6580011761E /* galleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = galleryViewController.swift; sourceTree = "<group>"; };
 		55E88BFE1E2B42270029A07E /* ieeeNSIT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ieeeNSIT.entitlements; sourceTree = "<group>"; };
 		55F1F8B21DAB671500B93D50 /* ieeeNSIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ieeeNSIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F1F8B51DAB671500B93D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		5523DF201DAFC792005046B9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5506B22A1E3F889B00B8589E /* gallery@2x.png */,
 				55DC06461E3E32B7005A8D3A /* ieeeWatermark.png */,
 				5532F52B1E17FD8100AF8FD8 /* eventsRefresher.png */,
 				5523DF1E1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png */,
@@ -179,6 +184,7 @@
 				55A874DF1E3D191D004434B3 /* ieeeIDViewController.swift */,
 				55D0C3E81DF994CB003BEB0B /* eventsViewController.swift */,
 				554A554F1DB091F20018E8F5 /* SDInstantArticleViewController.swift */,
+				55E3D7431E40D6580011761E /* galleryViewController.swift */,
 				5592E1761DB2555700A57FCD /* noImageFeedPageTest.swift */,
 				554A554D1DB086420018E8F5 /* File.swift */,
 				558553B01DAFC814003B6C48 /* ieeeFeedCell.swift */,
@@ -231,7 +237,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Swapnil Dhanwal";
 				TargetAttributes = {
 					55F1F8B11DAB671500B93D50 = {
@@ -279,6 +285,7 @@
 				55D0C3ED1DF9EA81003BEB0B /* heart.png in Resources */,
 				55977BF11E37CF8400887E89 /* pushNotifications.PNG in Resources */,
 				55DEF01B1DFBD07E00461F18 /* event.PNG in Resources */,
+				5506B22B1E3F889B00B8589E /* gallery@2x.png in Resources */,
 				55F1F8BD1DAB671500B93D50 /* Main.storyboard in Resources */,
 				5541F32C1DB026FB00846335 /* ic_thumb_up_3x.png in Resources */,
 				5523DF1F1DAFC78C005046B9 /* ic_thumb_up_black_48dp_2x.png in Resources */,
@@ -352,6 +359,7 @@
 				55D3D39B1DB368F300D5A014 /* spinner.swift in Sources */,
 				5523DF1D1DAFC307005046B9 /* color.swift in Sources */,
 				5575248B1E3A5CED008261BD /* SwapToastView.swift in Sources */,
+				55E3D7441E40D6580011761E /* galleryViewController.swift in Sources */,
 				55D0C3E91DF994CB003BEB0B /* eventsViewController.swift in Sources */,
 				554A55501DB091F20018E8F5 /* SDInstantArticleViewController.swift in Sources */,
 				55A874E01E3D191D004434B3 /* ieeeIDViewController.swift in Sources */,
@@ -390,6 +398,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 97FD9E792CC18284AA5572F7 /* Pods-ieeeNSIT.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -441,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2A142A6AE80190CEA534A36 /* Pods-ieeeNSIT.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -485,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 97FD9E792CC18284AA5572F7 /* Pods-ieeeNSIT.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ieeeNSIT/ieeeNSIT.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -503,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2A142A6AE80190CEA534A36 /* Pods-ieeeNSIT.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ieeeNSIT/ieeeNSIT.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

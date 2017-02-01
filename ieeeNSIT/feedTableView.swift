@@ -8,9 +8,9 @@
 
 import UIKit
 import SDWebImage
-import MWPhotoBrowser
+import IDMPhotoBrowser
 
-class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
+class feedTableView: UITableViewController{
     
     var next20 = String()
     var attachments = [String:[String:AnyObject]]()
@@ -24,13 +24,11 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
     var isRefresherAnimating = Bool()
     var navSpinner = UIActivityIndicatorView()
     var didScrollOnce = Bool()
-    var photos = [MWPhoto]()
     var s = UIActivityIndicatorView()
     var headerView = UIView()
     var headerLabel = UILabel()
     var screenshot = UIImage()
     var windowButton = UIButton()
-    var browser = MWPhotoBrowser()
     var statusBlurView = UIVisualEffectView()
     var placeholderImageView = UIImageView()
     var toast : SwapToastView!
@@ -520,7 +518,7 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
                     
                     self.showPlaceholder()
                     
-                }
+                } 
                 
             }))
             self.present(alert, animated: true, completion: {
@@ -1041,29 +1039,9 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         if self.highResImageURLs[id] != nil && self.messages[indexPath.row] == ""
         {
             
-            self.browser = MWPhotoBrowser()
-            photos.removeAll()
-            photos.append(MWPhoto(url: URL(string: self.highResImageURLs[self.ids[indexPath.row]]!)))
-            browser.delegate = self
-            browser.enableSwipeToDismiss = true
-            
-            self.windowButton = UIButton(type: .system)
-            
-            self.present(browser, animated: true) {
-                
-                self.windowButton.frame = CGRect(x: self.view.bounds.width*0.85-30, y: 40, width: 60, height: 40)
-                var s = NSMutableAttributedString()
-                if let f = UIFont(name: "Avenir Book", size: 17)
-                {
-                    s = NSMutableAttributedString(string: "Done", attributes: [NSFontAttributeName : f])
-                }
-                self.windowButton.setAttributedTitle(s, for: .normal)
-                self.windowButton.addTarget(self, action: #selector(feedTableView.dismissBrowser), for: .touchUpInside)
-                if let window = UIApplication.shared.delegate?.window
-                {
-                    window?.addSubview(self.windowButton)
-                }
-            }
+            let photo = IDMPhoto(url: URL(string: self.highResImageURLs[self.ids[indexPath.row]]!))
+            let browser = IDMPhotoBrowser(photos: [photo!])
+            self.present(browser!, animated: true, completion: nil)
             return
             
         }
@@ -1092,14 +1070,6 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
     
     //MARK : MWPhotobrowserDelegate methods
     
-    func dismissBrowser()
-    {
-        self.windowButton.removeFromSuperview()
-        self.browser.dismiss(animated: true) {
-            
-        }
-    }
-    
     func updateBlur()
     {
 
@@ -1109,21 +1079,5 @@ class feedTableView: UITableViewController, MWPhotoBrowserDelegate {
         UIGraphicsEndImageContext()
         
     }
-    
-    internal func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt
-    {
-        
-        return UInt(self.photos.count)
-        
-    }
-    
-    internal func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol!
-    {
-        
-        return self.photos[Int(index)]
-        
-    }
-    
-
     
 }

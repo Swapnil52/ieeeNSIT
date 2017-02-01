@@ -11,6 +11,7 @@ pod 'NYAlertViewController'
 pod 'MWPhotoBrowser', '~> 2.1'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'Toast', '~> 3.1'
+pod 'IDMPhotoBrowser', '~> 1.10'
 
 end
 

@@ -9,6 +9,7 @@
 import UIKit
 import MWPhotoBrowser
 import SDWebImage
+import IDMPhotoBrowser
 
 class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, MWPhotoBrowserDelegate {
     
@@ -25,6 +26,7 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
     var infoView = UIView()
     var textView = UITextView()
     var photos = [MWPhoto]()
+    var _photos = [IDMPhoto]()
     var passAttachments = [String:AnyObject]()
     var passMessage = String()
     var passHighResImageURL = String()
@@ -58,6 +60,7 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
         }
         headerLabel.attributedText = s
         headerLabel.textAlignment = .center
+        headerLabel.textColor = getColor(red: 37, green: 50, blue: 55)
         headerView.addSubview(headerLabel)
         
         headerLineLabel = UILabel(frame: CGRect(x: 0, y: self.headerView.frame.maxY-1, width: self.headerView.bounds.width, height: 0.5))
@@ -107,6 +110,7 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
         textView.font = UIFont(name: "Avenir Book", size: 20)
         let textHeight = textView.sizeThatFits(CGSize(width: self.infoView.bounds.width-60, height: 1000)).height
         textView.frame = CGRect(x: 30, y: 20, width: self.infoView.bounds.width-60, height: textHeight)
+        textView.textColor = getColor(red: 37, green: 50, blue: 55)
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.dataDetectorTypes = .all
@@ -160,6 +164,7 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
                             if let src = image["src"] as? String
                             {
                                 photos.append(MWPhoto(url: URL(string : src)!))
+                                _photos.append(IDMPhoto(url: URL(string: src)!))
                             }
                         }
                     }
@@ -185,29 +190,9 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
     func tapped()
     {
         
+        let browser = IDMPhotoBrowser(photos: self._photos)
+        self.present(browser!, animated: true, completion: nil)
         
-        browser = MWPhotoBrowser(photos: photos)
-        browser.delegate = self
-        browser.enableSwipeToDismiss = true
-        browser.alwaysShowControls = true
-        
-        self.windowButton = UIButton(type: .system)
-        
-        self.present(browser, animated: true) { 
-            
-            self.windowButton.frame = CGRect(x: self.view.bounds.width*0.85-30, y: 40, width: 60, height: 40)
-            var s = NSMutableAttributedString()
-            if let f = UIFont(name: "Avenir Book", size: 17)
-            {
-                s = NSMutableAttributedString(string: "Done", attributes: [NSFontAttributeName : f])
-            }
-            self.windowButton.setAttributedTitle(s, for: .normal)
-            self.windowButton.addTarget(self, action: #selector(SDInstantArticleViewController.dismissBrowser), for: .touchUpInside)
-            if let window = UIApplication.shared.delegate?.window
-            {
-                window?.addSubview(self.windowButton)
-            }
-        }
     }
     
     //MARK : MWPhotoBrowser delegate methods

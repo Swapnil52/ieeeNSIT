@@ -85,19 +85,23 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/DACircularProgress/DACircularProgress.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IDMPhotoBrowser/IDMPhotoBrowser.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MWPhotoBrowser/MWPhotoBrowser.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NYAlertViewController/NYAlertViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Toast/Toast.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIActivityIndicator-for-SDWebImage/UIActivityIndicator_for_SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/DACircularProgress/DACircularProgress.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IDMPhotoBrowser/IDMPhotoBrowser.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MWPhotoBrowser/MWPhotoBrowser.framework"
   install_framework "$BUILT_PRODUCTS_DIR/NYAlertViewController/NYAlertViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Toast/Toast.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIActivityIndicator-for-SDWebImage/UIActivityIndicator_for_SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
 fi

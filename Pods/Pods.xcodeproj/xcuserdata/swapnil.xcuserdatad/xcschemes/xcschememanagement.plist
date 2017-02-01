@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>IDMPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,15 +54,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>05569F3C10FD91BB981D7CEE83CBC732</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1354EBC2BC841E081A62B7783194B094</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4C2F8319FFA8CA7476F0DE16A0BF04BD</key>
+		<key>247433E0CB5E592BB6A16A268EF9398A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D36B86A60DFA81A54E2A17722E5B32D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,7 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7BAAEC1386420288825150BB5315CA52</key>
+		<key>702DF0AC332B240EC6A3670A257920C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7D3BB93C498058C554118B8F94A679A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>95A60D2FFE0591310D12ADCA6B742716</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,12 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DAF64AE46D5032A024E111A2A871B61A</key>
+		<key>CB453458E0389A16640B7A79015E84FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F91992A3378EF6983D1BAA9D8E3A5675</key>
+		<key>DAF64AE46D5032A024E111A2A871B61A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -52,6 +52,7 @@ class noImageFeedPageTest: UIViewController, UIScrollViewDelegate {
         }
         headerLabel.attributedText = s
         headerLabel.textAlignment = .center
+        headerLabel.textColor = getColor(red: 37, green: 50, blue: 55)
         headerView.addSubview(headerLabel)
         
         headerLineLabel = UILabel(frame: CGRect(x: 0, y: self.headerView.frame.maxY-1, width: self.headerView.bounds.width, height: 1))
@@ -89,6 +90,7 @@ class noImageFeedPageTest: UIViewController, UIScrollViewDelegate {
         textView.frame = CGRect(x: 30, y: 30, width: self.infoView.bounds.width-60, height: textHeight)
         textView.isEditable = false
         textView.isScrollEnabled = false
+        textView.textColor = getColor(red: 37, green: 50, blue: 55)
         textView.dataDetectorTypes = .all
         
         //update infoView's frame
