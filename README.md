@@ -7,6 +7,7 @@ Serves as the home page of the app. Displays posts from IEEE NSIT's facebook pag
 
 <img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/home.PNG" height = 300>
           <img src = "https://github.com/Swapnil52/ieeeNSIT/blob/master/ieeeNSIT/post.PNG" height = 300>
+          <img src = "http://i.giphy.com/vXfJs7KandWyk.gif">
           
 The blur effect shown above works by taking a low resolution screenshot just as the user taps on a cell, and presenting the new controller modally - with the screenshot masked by a UIVisualEffectView instance. This provides contextual awareness to the user.
 
