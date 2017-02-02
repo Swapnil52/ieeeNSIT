@@ -464,7 +464,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     public func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt
     {
         
-        return UInt(self.photos.count)
+        return UInt(self.photos.count) 
         
     }
     
