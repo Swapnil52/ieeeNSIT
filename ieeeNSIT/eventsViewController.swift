@@ -18,7 +18,7 @@ class eventsViewController : UIViewController {
     var imageView = UIImageView()
     var textView = UITextView()
     var lineLabel = UILabel()
-    var dateLabel = UILabel()
+    var dateTextView = UITextView()
     var nameLabel = UILabel()
     var pan = UIPanGestureRecognizer()
     var count = Int()
@@ -74,6 +74,7 @@ class eventsViewController : UIViewController {
             {
                 self.count = count
                 self.events = events
+                self.mainView.isUserInteractionEnabled = false
                 
                 //show toasts
                 self.toast = SwapToastView("Swipe to view events!", UIColor(red : 61/255, green : 78/255, blue : 245/255, alpha : 1), UIColor.white, 2, completion: {
@@ -81,6 +82,7 @@ class eventsViewController : UIViewController {
                     self.toast.removeFromSuperview()
                     self.toast = SwapToastView("Pull down to refresh!", UIColor(red : 61/255, green : 78/255, blue : 245/255, alpha : 1), UIColor.white, 2, completion: {
                         
+                        self.mainView.isUserInteractionEnabled = true
                         self.toast.removeFromSuperview()
                         self.spinner.stopAnimating()
                         self.displayEvent(self.index, completionHandler: {
@@ -178,31 +180,36 @@ class eventsViewController : UIViewController {
         }
         self.mainView.addSubview(self.imageView)
         self.mainView.backgroundColor = UIColor.groupTableViewBackground
-//        self.mainView.backgroundColor = UIColor.white
 
         self.lineLabel = UILabel(frame: CGRect(x: 0, y: self.imageView.frame.maxY, width: self.mainView.frame.width, height: 3))
         self.lineLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
         self.mainView.addSubview(self.lineLabel)
 
-        self.dateLabel = UILabel(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 40))
+        self.dateTextView = UITextView(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 40))
         let date = self.events[self.index]["start_time"] as! String
+        self.dateTextView.backgroundColor = UIColor.clear
+        self.dateTextView.textAlignment = .center 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
         let newDate = dateFormatter.date(from: date)
         dateFormatter.dateFormat = "dd-MM-yy,HH:mm"
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
+        self.dateTextView.adjustsFontForContentSizeCategory = true
+        self.dateTextView.isEditable = false
+        self.dateTextView.isScrollEnabled = false
+        self.dateTextView.dataDetectorTypes = .all
         let dateString = dateFormatter.string(from: newDate!)
-        self.dateLabel.textAlignment = .center
+        self.dateTextView.textAlignment = .center
         if let f = UIFont(name: "Avenir Book", size: 13)
         {
             let s = NSMutableAttributedString(string: "\(dateString)", attributes: [NSFontAttributeName : f])
-            self.dateLabel.attributedText = s
-            self.dateLabel.textColor = getColor(red: 37, green: 50, blue: 55)
+            self.dateTextView.attributedText = s
+            self.dateTextView.textColor = getColor(red: 37, green: 50, blue: 55)
         }
-        self.dateLabel.layer.cornerRadius = 5
-        self.dateLabel.clipsToBounds = true
-        self.mainView.addSubview(self.dateLabel)
+        self.dateTextView.layer.cornerRadius = 5
+        self.dateTextView.clipsToBounds = true
+        self.mainView.addSubview(self.dateTextView)
         
         self.nameLabel = UILabel(frame: CGRect(x: 10, y: self.lineLabel.frame.maxY + 10, width: self.mainView.frame.width*0.50, height: 40))
         if let f = UIFont(name: "Avenir Book", size: 13)
@@ -217,7 +224,6 @@ class eventsViewController : UIViewController {
         
         self.textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 5)))
         self.textView.backgroundColor = UIColor.groupTableViewBackground
-//        self.textView.backgroundColor = UIColor.white
         
         if let f = UIFont(name: "Avenir Book", size: 20)
         {
