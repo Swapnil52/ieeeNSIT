@@ -16,7 +16,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
     var loginTextField : UITextField!
     var doneView : UIView!
     var doneButton : UIButton!
-    var go : Bool!
+    var go = Bool()
     var spinner = UIActivityIndicatorView()
     var phoneNumber = String()
     var nameLabel = UILabel()
@@ -171,28 +171,33 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         
         //move loginView up
         let keyBoardFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let tf = self.loginView.convert(self.loginTextField.frame, to: self.view)
-        
-        self.doneView.frame = CGRect(x: 0, y: keyBoardFrame.minY-self.loginView.bounds.height*0.2, width: self.view.bounds.width, height: self.loginView.bounds.height*0.2)
-        self.doneView.alpha = 0
-        self.doneView.backgroundColor = UIColor.white
-        
-        
-        if (tf.maxY > keyBoardFrame.minY)
+        if self.loginTextField != nil
         {
+            let tf = self.loginView.convert(self.loginTextField.frame, to: self.view)
+            self.doneView.frame = CGRect(x: 0, y: keyBoardFrame.minY-self.loginView.bounds.height*0.2, width: self.view.bounds.width, height: self.loginView.bounds.height*0.2)
+            self.doneView.alpha = 0
+            self.doneView.backgroundColor = UIColor.white
             
-
-            UIView.animate(withDuration: 0.4) {
+            if (tf.maxY > keyBoardFrame.minY)
+            {
                 
-                self.doneView.layer.setAffineTransform(CGAffineTransform.identity)
-                self.doneView.alpha = 1
-
-                let dy = tf.maxY - keyBoardFrame.minY + 30 + self.doneView.frame.height
-                self.loginView.layer.setAffineTransform(CGAffineTransform(translationX: 0, y: -dy))
+                
+                UIView.animate(withDuration: 0.4) {
+                    
+                    self.doneView.layer.setAffineTransform(CGAffineTransform.identity)
+                    self.doneView.alpha = 1
+                    
+                    let dy = tf.maxY - keyBoardFrame.minY + 30 + self.doneView.frame.height
+                    self.loginView.layer.setAffineTransform(CGAffineTransform(translationX: 0, y: -dy))
+                    
+                }
                 
             }
-            
+
         }
+        
+        
+        
         
         
     }
@@ -200,7 +205,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
     func done()
     {
         
-        if (self.loginTextField.text?.characters.count)! > 0
+        if (self.loginTextField.text?.characters.count)! > 0 && (self.loginTextField.text?.characters.count)! <= 10
         {
             
             self.go = true
@@ -209,7 +214,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
             
             
         }
-        else if (self.loginTextField.text?.characters.count)! == 0
+        else
         {
             
             self.showAlert("Please enter a valid phone number")
@@ -223,7 +228,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillDisappear(_ notification : NSNotification)
     {
         
-        if self.go == false
+        if self.go == false && self.doneView != nil
         {
             UIView.animate(withDuration: 0.4, animations: {
                 
@@ -239,31 +244,37 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         else
         {
             
-            UIView.animate(withDuration: 0.4, animations: {
+            if self.doneView != nil
+            {
                 
-                self.doneView.alpha = 0
-                self.loginView.layer.setAffineTransform(CGAffineTransform.identity)
-                
-            }) { (success) in
-                
-                
-                print("load data now")
-                //prepare login view for loading data 
-                for view in self.loginView.subviews
-                {
+                UIView.animate(withDuration: 0.4, animations: {
                     
-                    view.removeFromSuperview()
+                    self.doneView.alpha = 0
+                    self.loginView.layer.setAffineTransform(CGAffineTransform.identity)
+                    
+                }) { (success) in
+                    
+                    
+                    print("load data now")
+                    //prepare login view for loading data
+                    for view in self.loginView.subviews
+                    {
+                        
+                        view.removeFromSuperview()
+                        
+                    }
+                    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
+                        
+                        self.configureID()
+                        
+                    }, completion: { (success) in
+                        
+                        
+                        
+                    })
                     
                 }
-                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: { 
-                    
-                    self.configureID()
-                    
-                }, completion: { (success) in
-                    
-                    
-                    
-                })
+
                 
             }
             
@@ -484,7 +495,8 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         
         //configure label
         self.notFoundTextView = UITextView(frame : CGRect(x: self.loginView.bounds.width*0.05, y: self.loginView.bounds.width*0.1, width: self.loginView.bounds.width*0.9, height: self.loginView.bounds.height*0.6))
-        self.notFoundTextView.text = "Seems like you're not registered in our database.\nContact us at ieeensit@gmail.com for payment information"
+        self.notFoundTextView.text = "Seems like you're not registered in our database.\nContact us at ieeensit@gmail.com for more information or message us on Facebook"
+        self.notFoundTextView.adjustsFontForContentSizeCategory = true
         self.notFoundTextView.textColor = UIColor.white
         self.notFoundTextView.textAlignment = .left
         self.notFoundTextView.dataDetectorTypes = .all

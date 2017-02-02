@@ -61,7 +61,7 @@ class eventsViewController : UIViewController {
         self.mainView.addSubview(spinner)
         
         //setting up the pageIndexLabel
-        self.pageIndexLabel = UILabel(frame: CGRect(x: self.view.bounds.width/2-30, y: self.mainView.frame.maxY-30, width: 60, height: 20))
+        self.pageIndexLabel = UILabel(frame: CGRect(x: self.view.bounds.width/2-30, y: self.mainView.frame.maxY + 15, width: 60, height: 20))
         self.pageIndexLabel.text = "\(self.index+1)/5"
         self.pageIndexLabel.font = UIFont(name: "Avenir Book", size: 15)
         self.pageIndexLabel.textAlignment = .center
@@ -116,8 +116,8 @@ class eventsViewController : UIViewController {
         
         //setting up the main view. Add subviews to this view as desired.
         mainView.layer.cornerRadius = 10
-        mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
-        mainView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+        mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: (self.view.bounds.height-49)*0.85)
+        mainView.backgroundColor = UIColor.groupTableViewBackground
 //        mainView.backgroundColor = UIColor.white
         mainView.layer.shadowPath = UIBezierPath(roundedRect: self.mainView.bounds, cornerRadius: 10).cgPath
         mainView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
@@ -177,7 +177,7 @@ class eventsViewController : UIViewController {
             
         }
         self.mainView.addSubview(self.imageView)
-        self.mainView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+        self.mainView.backgroundColor = UIColor.groupTableViewBackground
 //        self.mainView.backgroundColor = UIColor.white
 
         self.lineLabel = UILabel(frame: CGRect(x: 0, y: self.imageView.frame.maxY, width: self.mainView.frame.width, height: 3))
@@ -216,7 +216,7 @@ class eventsViewController : UIViewController {
         self.mainView.addSubview(self.nameLabel)
         
         self.textView = UITextView(frame: CGRect(x: 10, y: self.nameLabel.frame.maxY, width: self.mainView.bounds.width - 20, height: self.mainView.bounds.height - (self.nameLabel.frame.maxY + 5)))
-        self.textView.backgroundColor = getColor(red: 235, green: 235, blue: 241)
+        self.textView.backgroundColor = UIColor.groupTableViewBackground
 //        self.textView.backgroundColor = UIColor.white
         
         if let f = UIFont(name: "Avenir Book", size: 20)
@@ -529,7 +529,7 @@ class eventsViewController : UIViewController {
     
     override func viewWillLayoutSubviews() {
         
-        mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: self.view.bounds.height*0.85)
+        mainView.frame = CGRect(x: self.view.bounds.width/2-self.view.bounds.width*0.85/2, y: self.view.bounds.height/2-self.view.bounds.height*0.85/2, width: self.view.bounds.width*0.85, height: (self.view.bounds.height-49)*0.85)
         mainView.layer.shadowPath = UIBezierPath(roundedRect: self.mainView.bounds, cornerRadius: 10).cgPath
         mainView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
         mainView.layer.shadowOpacity = 0.3

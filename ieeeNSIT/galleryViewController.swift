@@ -9,9 +9,8 @@
 import UIKit
 import IDMPhotoBrowser
 import SDWebImage
-import MWPhotoBrowser
 
-class galleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MWPhotoBrowserDelegate, UICollectionViewDelegateFlowLayout {
+class galleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     var headerView : UIView!
@@ -23,9 +22,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     var spinner = UIActivityIndicatorView()
     var retryButton = UIButton()
     var count = Int()
-    var photos = [MWPhoto]()
     var _photos = [IDMPhoto]()
-    var browser = MWPhotoBrowser()
     var windowButton = UIButton()
     
     override func viewDidLoad() {
@@ -42,7 +39,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.view.addSubview(self.spinner)
         self.spinner.startAnimating()
         
-        self.retryButton = UIButton(type: .roundedRect)
+        self.retryButton = UIButton(type: .custom)
         self.retryButton.frame = CGRect(x: self.view.bounds.width/2-50, y: self.view.bounds.height/2-50, width: 100, height: 100)
         self.retryButton.setImage(UIImage(named : "refresh.png"), for: .normal)
         self.view.addSubview(self.retryButton)
@@ -110,7 +107,6 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     if let source = item["source"] as? String
                     {
                         
-                        self.photos.append(MWPhoto(url: URL(string : source)))
                         self._photos.append(IDMPhoto(url: URL(string : source)))
                         self.highResImageURLs.append(source)
                         
@@ -148,9 +144,13 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     func retry()
     {
         
+        self.retryButton.alpha = 0
         self.spinner.startAnimating()
         self.headerView.removeFromSuperview()
-        self.galleryCollectionView.removeFromSuperview()
+        if galleryCollectionView != nil
+        {
+            self.galleryCollectionView.removeFromSuperview()
+        }
         
         let url = "https://graph.facebook.com/v2.5/176108879110422/photos?fields=name,likes.summary(true),images,source&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD"
         self.downloadData(urlString: url) { (array, success, error) in
@@ -213,7 +213,8 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     if let source = item["source"] as? String
                     {
                         
-                        self.photos.append(MWPhoto(url: URL(string : source)))
+                        self._photos.append(IDMPhoto(url: URL(string : source)))
+                        self.highResImageURLs.append(source)
                         
                     }
                 }
@@ -234,6 +235,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     
                     //do something
                     self.spinner.stopAnimating()
+                    self.retryButton.alpha = 1
                     
                 })
                 
@@ -286,11 +288,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
             {
                 DispatchQueue.main.async(execute: {
                     
-                    self.showAlert(errorString: error.localizedDescription, completionHandler: {
-                        
-                        completionHandler([], false, error)
-                        
-                    })
+                    completionHandler([], false, error)
                     
                 })
                 
@@ -343,11 +341,12 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             
             //do something
+            completionHandler()
+
             
         }))
         self.present(alert, animated: true) {
             
-            completionHandler()
             
         }
         
@@ -374,23 +373,6 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     {
         
         let cell = self.galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-//        let path = UIBezierPath(roundedRect: cell.paddingView.bounds, cornerRadius: 5)
-//        let mask = CAShapeLayer()
-//        mask.path = path.cgPath
-//        cell.paddingView.layer.mask = mask
-//        cell.shadowView.backgroundColor = UIColor.clear
-//        cell.shadowView.layer.shadowPath = path.cgPath
-//        cell.shadowView.layer.shadowOpacity = 0.3
-//        cell.shadowView.layer.shadowOffset = CGSize(width: -0.5, height: 0.5)
-//        cell.likes.text = "\(self.likes[indexPath.row])"
-//        cell.thumbnail.contentMode = .scaleAspectFill
-//        cell.thumbnail.setShowActivityIndicator(true)
-//        cell.thumbnail.clipsToBounds = true
-//        cell.thumbnail.sd_setImage(with: URL(string :self.smallImageURLS[indexPath.row])) { (image, error, cache, url) in
-//            
-//            //do something
-//            
-//        }
         
         for view in cell.subviews
         {
@@ -413,6 +395,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         thumbnail.backgroundColor = getColor(red: 61, green: 78, blue: 245)
         thumbnail.clipsToBounds = true
         thumbnail.setIndicatorStyle(.whiteLarge)
+        thumbnail.setShowActivityIndicator(true)
         thumbnail.contentMode = .scaleAspectFill
         thumbnail.sd_setImage(with: URL(string : self.smallImageURLS[indexPath.row]))
         paddingView.addSubview(thumbnail)
@@ -425,8 +408,11 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         like.text = "\(self.likes[indexPath.row])"
         like.font = UIFont(name: "Avenir Book", size: 15)
         like.textAlignment = .right
-        
         paddingView.addSubview(like)
+        
+        let line = UILabel(frame: CGRect(x: 0, y: thumbnail.frame.maxY, width: paddingView.bounds.width, height: 2))
+        line.backgroundColor = getColor(red: 61, green: 78, blue: 245)
+        paddingView.addSubview(line)
         
         cell.addSubview(shadowView)
         cell.addSubview(paddingView)
@@ -444,14 +430,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     
-    func dismissBrowser()
-    {
-        
-        self.browser.dismiss(animated: true, completion: nil)
-        self.windowButton.removeFromSuperview()
-        
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
@@ -461,20 +440,6 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     
-    public func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt
-    {
-        
-        return UInt(self.photos.count) 
-        
-    }
-    
-    public func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol!
-    {
-        
-        return self.photos[Int(index)]
-        
-    }
-
 
 }
 
