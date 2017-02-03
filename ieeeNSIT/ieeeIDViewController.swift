@@ -178,19 +178,33 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
             self.doneView.alpha = 0
             self.doneView.backgroundColor = UIColor.white
             
-            if (tf.maxY > keyBoardFrame.minY)
-            {
+            
+//            if (tf.maxY > keyBoardFrame.minY)
+//            {
+//                
+//                UIView.animate(withDuration: 0.4) {
+//                    
+//                    self.doneView.layer.setAffineTransform(CGAffineTransform.identity)
+//                    self.doneView.alpha = 1
+//                    
+//                    print (self.doneView)
+//                    
+//                    let dy = tf.maxY - keyBoardFrame.minY + 30 + self.doneView.frame.height
+//                    self.loginView.layer.setAffineTransform(CGAffineTransform(translationX: 0, y: -dy))
+//                    
+//                }
+//                
+//            }
+            
+            UIView.animate(withDuration: 0.4) {
                 
+                self.doneView.layer.setAffineTransform(CGAffineTransform.identity)
+                self.doneView.alpha = 1
                 
-                UIView.animate(withDuration: 0.4) {
-                    
-                    self.doneView.layer.setAffineTransform(CGAffineTransform.identity)
-                    self.doneView.alpha = 1
-                    
-                    let dy = tf.maxY - keyBoardFrame.minY + 30 + self.doneView.frame.height
-                    self.loginView.layer.setAffineTransform(CGAffineTransform(translationX: 0, y: -dy))
-                    
-                }
+                print (self.doneView)
+                
+                let dy = tf.maxY - keyBoardFrame.minY + 30 + self.doneView.frame.height
+                self.loginView.layer.setAffineTransform(CGAffineTransform(translationX: 0, y: -dy))
                 
             }
 
@@ -494,8 +508,9 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         self.loginView.addSubview(self.watermarkImageView)
         
         //configure label
-        self.notFoundTextView = UITextView(frame : CGRect(x: self.loginView.bounds.width*0.05, y: self.loginView.bounds.width*0.1, width: self.loginView.bounds.width*0.9, height: self.loginView.bounds.height*0.6))
-        self.notFoundTextView.text = "Seems like you're not registered in our database.\nContact us at ieeensit@gmail.com for more information or message us on Facebook"
+        self.notFoundTextView = UITextView(frame : CGRect(x: self.loginView.bounds.width*0.03, y: self.loginView.bounds.width*0.1, width: self.loginView.bounds.width*0.94, height: self.loginView.bounds.height*0.6))
+        self.notFoundTextView.text = "Seems like you're not registered in our database.\nContact us at\nieeensit2016@gmail.com for more information or message us on Facebook"
+        self.notFoundTextView.font = UIFont(name: "Avenir Book", size: 22)
         self.notFoundTextView.adjustsFontForContentSizeCategory = true
         self.notFoundTextView.textColor = UIColor.white
         self.notFoundTextView.textAlignment = .left
@@ -505,7 +520,6 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         self.notFoundTextView.isScrollEnabled = false
         self.notFoundTextView.linkTextAttributes = [NSUnderlineStyleAttributeName :
             NSUnderlineStyle.styleSingle.rawValue, NSForegroundColorAttributeName : UIColor.white]
-        self.notFoundTextView.font = UIFont(name: "Avenir Book", size: 25)
         self.loginView.addSubview(notFoundTextView)
         
         //configure backButton
@@ -522,6 +536,23 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         }
         self.backButton.addTarget(self, action: #selector(ieeeIDViewController.back), for: .touchUpInside)
         self.loginView.addSubview(self.backButton)
+        
+    }
+    
+    func setAttributes() -> NSMutableAttributedString
+    {
+        
+        let s = "Seems like you're not registered in our database.\nContact us at\nieeensit2016@gmail.com for more information or message us on Facebook"
+        var mutStr = NSMutableAttributedString()
+        if let f = UIFont(name: "Avenir Book", size: 22)
+        {
+            
+            mutStr = NSMutableAttributedString(string: s, attributes: [NSFontAttributeName : f])
+            
+        }
+        
+        //        mutStr.add
+        return mutStr
         
     }
     
@@ -553,7 +584,7 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
     func getData(completion : @escaping (_ user : [String : AnyObject], _ success : Bool) -> Void)
     {
         
-        let url = URL(string : "http://ieeensit.org/ieeemembers.json")!
+        let url = URL(string : "http://ieeensit.org/members1.json")!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if let error = error

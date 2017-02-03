@@ -10,7 +10,7 @@ import UIKit
 import IDMPhotoBrowser
 import SDWebImage
 
-class galleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class galleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, IDMPhotoBrowserDelegate {
 
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     var headerView : UIView!
@@ -24,6 +24,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     var count = Int()
     var _photos = [IDMPhoto]()
     var windowButton = UIButton()
+    var photoIndex = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.configureHeaderView()
         
         self.count = 0
+        self.photoIndex = 0
                 
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         self.spinner.center = self.view.center
@@ -106,8 +108,14 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     //get high res image URL
                     if let source = item["source"] as? String
                     {
-                        
-                        self._photos.append(IDMPhoto(url: URL(string : source)))
+                        let photo = IDMPhoto(url: URL(string: source))
+                        if let name = item["name"] as? String
+                        {
+                            
+                            photo?.caption = name
+                            
+                        }
+                        self._photos.append(photo!)
                         self.highResImageURLs.append(source)
                         
                     }
@@ -213,7 +221,14 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     if let source = item["source"] as? String
                     {
                         
-                        self._photos.append(IDMPhoto(url: URL(string : source)))
+                        let photo = IDMPhoto(url: URL(string: source))
+                        if let name = item["name"] as? String
+                        {
+                            
+                            photo?.caption = name
+                            
+                        }
+                        self._photos.append(photo!)
                         self.highResImageURLs.append(source)
                         
                     }
@@ -267,14 +282,20 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     func configureCollectionView(completion : @escaping () -> Void)
     {
         
-        //set up collectionView
-        self.galleryCollectionView.dataSource = self
-        self.galleryCollectionView.delegate = self
-        self.galleryCollectionView.contentInset.bottom = 49
-        self.galleryCollectionView.contentInset.left = 10
-        self.galleryCollectionView.contentInset.right = 10
-        self.galleryCollectionView.contentInset.top = self.headerView.frame.maxY
-        completion()
+        if self.galleryCollectionView != nil
+        {
+            
+            //set up collectionView
+            self.galleryCollectionView.dataSource = self
+            self.galleryCollectionView.delegate = self
+            self.galleryCollectionView.contentInset.bottom = 49
+            self.galleryCollectionView.contentInset.left = 10
+            self.galleryCollectionView.contentInset.right = 10
+            self.galleryCollectionView.contentInset.top = self.headerView.frame.maxY
+            completion()
+
+            
+        }
         
     }
     
@@ -423,6 +444,21 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     
+    
+    //MARK : Delegate methods for IDMPhotoBrowser
+    
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAt index: UInt) -> IDMCaptionView!
+    {
+        
+        let photo = self._photos[self.photoIndex]
+        let captionView = BlurCaptionView(photo: photo)
+        return captionView
+        
+    }
+    
+    
+    //MARK : Delegate methods for Collection View
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         
@@ -435,6 +471,9 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         
         let _browser = IDMPhotoBrowser(photos: [self._photos[indexPath.row]])
+        _browser?.delegate = self
+        self.photoIndex = indexPath.row
+        _browser?.usePopAnimation = true
         self.present(_browser!, animated: true, completion: nil)
         
         
