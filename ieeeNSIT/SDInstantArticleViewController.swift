@@ -148,7 +148,7 @@ class SDInstantArticleViewController : UIViewController, UIScrollViewDelegate, M
                                 {
                                     if let src = image["src"] as? String
                                     {
-                                        photos.append(MWPhoto(url: URL(string: src)!))
+                                        _photos.append(IDMPhoto(url: URL(string: src)!))
                                     }
                                 }
                             }

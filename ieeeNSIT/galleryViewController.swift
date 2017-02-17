@@ -155,9 +155,9 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.retryButton.alpha = 0
         self.spinner.startAnimating()
         self.headerView.removeFromSuperview()
-        if galleryCollectionView != nil
+        if galleryCollectionView.alpha == 1
         {
-            self.galleryCollectionView.removeFromSuperview()
+            self.galleryCollectionView.alpha = 0
         }
         
         let url = "https://graph.facebook.com/v2.5/176108879110422/photos?fields=name,likes.summary(true),images,source&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD"
@@ -235,6 +235,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                 }
                 print(self.likes.count)
                 self.view.addSubview(self.headerView)
+                self.galleryCollectionView.alpha = 1
                 self.configureCollectionView {
                     
                     self.spinner.stopAnimating()
@@ -266,7 +267,7 @@ class galleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         self.headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 75))
         self.headerView.backgroundColor = UIColor.clear
-        let blur = UIBlurEffect(style: .light)
+        let blur = UIBlurEffect(style: .prominent)
         self.blurView = UIVisualEffectView(effect: blur)
         self.blurView.frame = self.headerView.bounds
         self.headerView.addSubview(self.blurView)

@@ -509,18 +509,20 @@ class ieeeIDViewController: UIViewController, UITextFieldDelegate {
         
         //configure label
         self.notFoundTextView = UITextView(frame : CGRect(x: self.loginView.bounds.width*0.03, y: self.loginView.bounds.width*0.1, width: self.loginView.bounds.width*0.94, height: self.loginView.bounds.height*0.6))
+        self.notFoundTextView.adjustsFontForContentSizeCategory = true
         self.notFoundTextView.text = "Seems like you're not registered in our database.\nContact us at\nieeensit2016@gmail.com for more information or message us on Facebook"
-        self.notFoundTextView.font = UIFont(name: "Avenir Book", size: 22)
+        self.notFoundTextView.font = UIFont(name: "Avenir Book", size: 19)
         self.notFoundTextView.adjustsFontForContentSizeCategory = true
         self.notFoundTextView.textColor = UIColor.white
         self.notFoundTextView.textAlignment = .left
         self.notFoundTextView.dataDetectorTypes = .all
         self.notFoundTextView.backgroundColor = UIColor.clear
         self.notFoundTextView.isEditable = false
-        self.notFoundTextView.isScrollEnabled = false
+        self.notFoundTextView.isScrollEnabled = true
         self.notFoundTextView.linkTextAttributes = [NSUnderlineStyleAttributeName :
             NSUnderlineStyle.styleSingle.rawValue, NSForegroundColorAttributeName : UIColor.white]
         self.loginView.addSubview(notFoundTextView)
+        self.notFoundTextView.flashScrollIndicators()
         
         //configure backButton
         self.backButton = UIButton(type: .roundedRect)

@@ -8,56 +8,71 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>0</integer>
 		</dict>
 		<key>IDMPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-		</dict>
-		<key>NYAlertViewController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods-ieeeNSIT.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>Toast.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>UIActivityIndicator-for-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -68,6 +83,11 @@
 			<true/>
 		</dict>
 		<key>17CEAD1B3EC4E80098DF5F8AA00BE966</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>241CC5607E7AB284A8A3A79785DA887A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,17 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>702DF0AC332B240EC6A3670A257920C4</key>
+		<key>7B0B470F26C70C8FD2D776949F8C9308</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D3BB93C498058C554118B8F94A679A1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>95A60D2FFE0591310D12ADCA6B742716</key>
+		<key>9174D4596D72804FCD8DFEA396974F82</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -108,11 +123,6 @@
 			<true/>
 		</dict>
 		<key>CB453458E0389A16640B7A79015E84FD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DAF64AE46D5032A024E111A2A871B61A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

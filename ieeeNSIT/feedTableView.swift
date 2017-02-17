@@ -449,6 +449,7 @@ class feedTableView: UITableViewController{
         
         let url = "https://graph.facebook.com/278952135548721/posts?limit=20&fields=id,full_picture,picture,from,shares,attachments,message,object_id,link,created_time,comments.limit(0).summary(true),likes.limit(0).summary(true)&access_token=CAAGZAwVFNCKgBAANhEYok6Xh7Q7UZBeTZCUqwPDLYhRZCmNn0igI8SE339jSn2zjxCpA1JUmXHm55XKVXslhdKKoTF3b5sLsiZBVd0ylYwX3MIGOnRyzn0T2XVywwoPKP7ML9WZCqELGRuIGxoM8ia05CiUiqcbgsb4wzTuBKkvKaqb7TPt2VnPtprRZBWda4kZD"
         
+        
         if Reachability.isConnectedToNetwork() == true
         {
             
@@ -668,7 +669,7 @@ class feedTableView: UITableViewController{
                     
                     self.refresherLabel.attributedText = NSMutableAttributedString(string: "Refreshing!", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.white])
                     
-                }
+                } 
                 if colorIndex%2 == 0
                 {
                     
@@ -987,7 +988,7 @@ class feedTableView: UITableViewController{
             }
             else
             {
-                cell.message.text = "No description available"
+                cell.message.text = "Nothing to see here!"
             }
             cell.date.text = self.dates[indexPath.row]
             cell.likes.text = String(self.likes[indexPath.row])
@@ -1017,7 +1018,7 @@ class feedTableView: UITableViewController{
         }
         else
         {
-            cell.message.text = "No description available"
+            cell.message.text = "Nothing to see here!"
         }
         cell.date.text = self.dates[indexPath.row]
         cell.likes.text = String(self.likes[indexPath.row])

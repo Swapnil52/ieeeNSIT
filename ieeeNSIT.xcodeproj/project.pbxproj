@@ -32,6 +32,8 @@
 		559F65311E44AA6100E82D54 /* ieeeiOS40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559F65301E44AA6100E82D54 /* ieeeiOS40@2x.png */; };
 		559F65331E44AA7000E82D54 /* ieeeiOS60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559F65321E44AA7000E82D54 /* ieeeiOS60@2x.png */; };
 		55A136E61DAE25AC001AB95A /* connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A136E51DAE25AC001AB95A /* connection.swift */; };
+		55A3D8F21E4C37E400BB2800 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D8F11E4C37E400BB2800 /* aboutViewController.swift */; };
+		55A3D8F41E4C3B2500BB2800 /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A3D8F31E4C3B2500BB2800 /* about@2x.png */; };
 		55A874DE1E3D18DD004434B3 /* id@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A874DD1E3D18DD004434B3 /* id@2x.png */; };
 		55A874E01E3D191D004434B3 /* ieeeIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A874DF1E3D191D004434B3 /* ieeeIDViewController.swift */; };
 		55A874E21E3D1946004434B3 /* welcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A874E11E3D1946004434B3 /* welcomeView.swift */; };
@@ -82,6 +84,8 @@
 		559F65301E44AA6100E82D54 /* ieeeiOS40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ieeeiOS40@2x.png"; sourceTree = "<group>"; };
 		559F65321E44AA7000E82D54 /* ieeeiOS60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ieeeiOS60@2x.png"; sourceTree = "<group>"; };
 		55A136E51DAE25AC001AB95A /* connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = connection.swift; sourceTree = "<group>"; };
+		55A3D8F11E4C37E400BB2800 /* aboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
+		55A3D8F31E4C3B2500BB2800 /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
 		55A874DD1E3D18DD004434B3 /* id@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id@2x.png"; sourceTree = "<group>"; };
 		55A874DF1E3D191D004434B3 /* ieeeIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ieeeIDViewController.swift; sourceTree = "<group>"; };
 		55A874E11E3D1946004434B3 /* welcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcomeView.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		5523DF201DAFC792005046B9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				55A3D8F31E4C3B2500BB2800 /* about@2x.png */,
 				559F65221E44A60300E82D54 /* ieeeTrans.png */,
 				5506B22A1E3F889B00B8589E /* gallery@2x.png */,
 				55DC06461E3E32B7005A8D3A /* ieeeWatermark.png */,
@@ -219,8 +224,9 @@
 			children = (
 				55F1F8B51DAB671500B93D50 /* AppDelegate.swift */,
 				55A874DF1E3D191D004434B3 /* ieeeIDViewController.swift */,
-				55D0C3E81DF994CB003BEB0B /* eventsViewController.swift */,
 				554A554F1DB091F20018E8F5 /* SDInstantArticleViewController.swift */,
+				55A3D8F11E4C37E400BB2800 /* aboutViewController.swift */,
+				55D0C3E81DF994CB003BEB0B /* eventsViewController.swift */,
 				55E3D7431E40D6580011761E /* galleryViewController.swift */,
 				559F65201E449BC100E82D54 /* BlurCaptionView.swift */,
 				5592E1761DB2555700A57FCD /* noImageFeedPageTest.swift */,
@@ -281,10 +287,10 @@
 					55F1F8B11DAB671500B93D50 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 3A9TH8N8KH;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -329,6 +335,7 @@
 				55AFDDF71E43840E0059CB16 /* gallery.PNG in Resources */,
 				55977BF11E37CF8400887E89 /* pushNotifications.PNG in Resources */,
 				55AFDDF51E4380A10059CB16 /* events.PNG in Resources */,
+				55A3D8F41E4C3B2500BB2800 /* about@2x.png in Resources */,
 				559F65261E44A7E400E82D54 /* ieeeiOS180@3x.png in Resources */,
 				55AFDDF91E439F230059CB16 /* id.PNG in Resources */,
 				5506B22B1E3F889B00B8589E /* gallery@2x.png in Resources */,
@@ -417,6 +424,7 @@
 				553F68BE1DAD5E3100EA3A75 /* feedTableView.swift in Sources */,
 				559F65211E449BC100E82D54 /* BlurCaptionView.swift in Sources */,
 				55A136E61DAE25AC001AB95A /* connection.swift in Sources */,
+				55A3D8F21E4C37E400BB2800 /* aboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +474,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -518,6 +527,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -546,14 +556,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ieeeNSIT/ieeeNSIT.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Swapnil Dhanwal (3A9TH8N8KH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 3A9TH8N8KH;
 				INFOPLIST_FILE = ieeeNSIT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Swapnil-Dhanwal.ieeeNSIT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f5699dbc-d4c6-47bb-b809-712f6b6c4705";
+				PROVISIONING_PROFILE_SPECIFIER = ieeeNSITTest;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -565,14 +576,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ieeeNSIT/ieeeNSIT.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Swapnil Dhanwal (3A9TH8N8KH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 3A9TH8N8KH;
 				INFOPLIST_FILE = ieeeNSIT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Swapnil-Dhanwal.ieeeNSIT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f5699dbc-d4c6-47bb-b809-712f6b6c4705";
+				PROVISIONING_PROFILE_SPECIFIER = ieeeNSITTest;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

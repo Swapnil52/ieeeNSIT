@@ -139,13 +139,17 @@ class eventsViewController : UIViewController {
     func displayEvent(_ i : Int, completionHandler : @escaping () -> Void)
     {
         
+
         for view in self.mainView.subviews
         {
-            if view != self.blurView
-            {
-                view.removeFromSuperview()
-            }
+        
+            view.removeFromSuperview()
+            
         }
+        
+        //This is a bug in Xcode. Apparently, I need to remove the mainView from view every time displayEvent is called so as to refresh the textView and turn data-detection back on.
+        self.mainView.removeFromSuperview()
+        self.view.addSubview(self.mainView)
         
         if self.events[self.index].count > 0
         {
@@ -156,7 +160,7 @@ class eventsViewController : UIViewController {
                 let currentImageURL =  URL(string: source)
                 //cancel current image download, if extant
                 self.imageView.sd_cancelCurrentImageLoad()
-                self.imageView.contentMode = .scaleToFill
+                self.imageView.contentMode = .scaleAspectFill
                 self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.mainView.bounds.width, height: self.mainView.bounds.height * 0.3))
                 self.imageView.backgroundColor = getColor(red: 68, green: 74, blue: 236)
                 self.imageView.setShowActivityIndicator(true)
@@ -171,6 +175,7 @@ class eventsViewController : UIViewController {
                     
                     //do something
                     self.imageView.clipsToBounds = false
+                    self.imageView.contentMode = .scaleAspectFill
                     
                 }
 
@@ -185,22 +190,27 @@ class eventsViewController : UIViewController {
         self.lineLabel.backgroundColor = getColor(red: 61, green: 78, blue: 245)
         self.mainView.addSubview(self.lineLabel)
 
-        self.dateTextView = UITextView(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.35, height: 40))
+        self.dateTextView = UITextView(frame: CGRect(x: 0.65*self.mainView.bounds.width - 10, y: self.lineLabel.frame.maxY+10, width: self.mainView.bounds.width * 0.4, height: 40))
         let date = self.events[self.index]["start_time"] as! String
         self.dateTextView.backgroundColor = UIColor.clear
-        self.dateTextView.textAlignment = .center 
+        self.dateTextView.textAlignment = .center
+        
+        //get date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
         let newDate = dateFormatter.date(from: date)
         dateFormatter.dateFormat = "dd-MM-yy,HH:mm"
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
+        
+        self.dateTextView.dataDetectorTypes = .calendarEvent
         self.dateTextView.adjustsFontForContentSizeCategory = true
+        self.dateTextView.isSelectable = true
         self.dateTextView.isEditable = false
         self.dateTextView.isScrollEnabled = false
         self.dateTextView.dataDetectorTypes = .all
         let dateString = dateFormatter.string(from: newDate!)
-        self.dateTextView.textAlignment = .center
+        self.dateTextView.textAlignment = .right
         if let f = UIFont(name: "Avenir Book", size: 13)
         {
             let s = NSMutableAttributedString(string: "\(dateString)", attributes: [NSFontAttributeName : f])
@@ -208,7 +218,6 @@ class eventsViewController : UIViewController {
             self.dateTextView.textColor = getColor(red: 37, green: 50, blue: 55)
         }
         self.dateTextView.layer.cornerRadius = 5
-        self.dateTextView.clipsToBounds = true
         self.mainView.addSubview(self.dateTextView)
         
         self.nameLabel = UILabel(frame: CGRect(x: 10, y: self.lineLabel.frame.maxY + 10, width: self.mainView.frame.width*0.50, height: 40))

@@ -83,7 +83,13 @@ class noImageFeedPageTest: UIViewController, UIScrollViewDelegate {
         self.scrollView.addSubview(infoView)
         
         
-        let text = passMessage
+        var text = passMessage
+        if passMessage == ""
+        {
+            
+            text = "Nothing to see here!"
+            
+        }
         textView.text = text
         textView.font = UIFont(name: "Avenir Book", size: 20)
         textHeight = textView.sizeThatFits(CGSize(width: self.infoView.bounds.width-60, height: 1000)).height

@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         
         //send the device token to our server
-        var request = URLRequest(url: URL(string: "http://fgethell.xyz/iospush/iospush.php?token=\(deviceTokenString)")!)
+        var request = URLRequest(url: URL(string: "http://fgethell.xyz/iospushfinal/iospush.php?token=\(deviceTokenString)")!)
         request.httpMethod = "POST"
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
