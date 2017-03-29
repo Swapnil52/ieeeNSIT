@@ -68,6 +68,7 @@ You'll need:
 
 ## Other repositories:
 - Android : [Ajay Chowdhary](https://github.com/AjayChowdhary/IEEENSIT)
+- Push Notifications : [Siddharth Nijhawan](https://github.com/fgethell/ios-push-notifications)
 
 ## Contact information
 This repository is written and maintained by Swapnil Dhanwal.
